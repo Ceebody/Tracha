@@ -1,0 +1,107 @@
+b
+    <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserProfileActivity"
+    android:background="@color/purple_200">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="#C78D5E">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:id="@+id/profile_dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/pro"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profile"
+                    android:layout_alignStart="@+id/profile_dp"
+                    android:layout_below="@+id/profile_dp"
+                    android:hint="Loading..."
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/white"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:layout_marginTop="5dp"
+                    android:textSize="24dp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="15dp"
+                android:layout_margin="15dp"
+                android:background="@color/white">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/person_200"
+                    android:id="@+id/profile2"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/show_fullname"
+                    android:layout_alignStart="@+id/profile2"
+                    android:hint="Loading"
+                    android:layout_marginStart="50dp"
+                    android:textSize="24dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/show_fullname"
+                    android:background="@color/purple_700"
+                    android:id="@+id/divider1"/>
+
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/email"
+                    android:id="@+id/profile_email"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/divider1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/show_email"
+                    android:layout_alignStart="@+id/profile_email"
+                    android:hint="Loading"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/divider1"
+                    android:layout_marginStart="50dp"
+                    android:textSize="24dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/profile_email"
+                    android:background="@color/purple_700"
+                    android:id="@+id/divider2"/>
+
+
+
+            </RelativeLayout>
+
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:background="@color/teal_700">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_margin="15dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/textView_register_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please enter your credentials to register on the Tracha App"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Role"
+            android:id="@+id/textView_selection"
+            android:layout_below="@+id/textView_register_head"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:layout_marginTop="10dp"/>
+
+       <RadioGroup
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:layout_below="@+id/textView_selection"
+           android:id="@+id/radio"
+           android:gravity="center">
+
+           <RadioButton
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/radio_parent"
+               android:text="Parent"
+               android:textSize="20dp"
+               android:textColor="#555555"/>
+           <RadioButton
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/radio_driver"
+               android:text="Driver"
+               android:textSize="20dp"
+               android:textColor="#555555"/>
+       </RadioGroup>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_register_full_name"
+            android:text="Full Name*"
+            android:layout_below="@+id/radio"
+            android:textColor="#555555"
+            android:textSize="24sp"
+            android:padding="6dp"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_register_full_name"
+            android:hint="Surname first"
+            android:inputType="textPersonName"
+            android:textSize="27sp"
+            android:padding="6dp"
+            android:background="@drawable/border"
+            android:layout_below="@+id/textView_register_full_name"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_register_id_number"
+            android:text="ID Number*"
+            android:textColor="#555555"
+            android:textSize="24sp"
+            android:padding="6dp"
+            android:layout_below="@+id/editText_register_full_name"
+            android:layout_marginTop="30dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_register_id_number"
+            android:hint="ID Number"
+            android:inputType="textCapCharacters"
+            android:textSize="27sp"
+            android:padding="6dp"
+            android:background="@drawable/border"
+            android:layout_below="@+id/textView_register_id_number"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_register_contact_number"
+            android:text="Contact Number*"
+            android:textColor="#555555"
+            android:textSize="24sp"
+            android:padding="6dp"
+            android:layout_below="@+id/editText_register_id_number"
+            android:layout_marginTop="30dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_register_contact_number"
+            android:hint="contact"
+            android:inputType="textPersonName"
+            android:textSize="27sp"
+            android:padding="6dp"
+            android:background="@drawable/border"
+            android:layout_below="@+id/textView_register_contact_number"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_register_car_number"
+            android:text="Car Name*"
+            android:textColor="#555555"
+            android:textSize="24sp"
+            android:padding="6dp"
+            android:layout_below="@+id/editText_register_contact_number"
+            android:layout_marginTop="30dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_register_car_number"
+            android:hint="Car number"
+            android:inputType="textCapSentences"
+            android:textSize="27sp"
+            android:padding="6dp"
+            android:background="@drawable/border"
+            android:layout_below="@+id/textView_register_car_number"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_register_email"
+            android:text="Email*"
+            android:textColor="#555555"
+            android:textSize="24sp"
+            android:padding="6dp"
+            android:layout_below="@+id/editText_register_car_number"
+            android:layout_marginTop="30dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_register_email"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textSize="27sp"
+            android:padding="6dp"
+            android:background="@drawable/border"
+            android:layout_below="@+id/textView_register_email"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_register_password"
+            android:text="password*"
+            android:textColor="#555555"
+            android:textSize="24sp"
+            android:padding="6dp"
+            android:layout_below="@+id/editText_register_email"
+            android:layout_marginTop="30dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_register_password"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:textSize="27sp"
+            android:padding="6dp"
+            android:background="@drawable/border"
+            android:layout_below="@+id/textView_register_password"/>
+
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_register_confirm_password"
+        android:text="Confirm password*"
+        android:textColor="#555555"
+        android:textSize="24sp"
+        android:padding="6dp"
+        android:layout_below="@+id/editText_register_password"
+        android:layout_marginTop="30dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_register_confirm_password"
+            android:hint="confirm password"
+            android:inputType="textPassword"
+            android:textSize="27sp"
+            android:padding="6dp"
+            android:background="@drawable/border"
+            android:layout_below="@+id/textView_register_confirm_password"/>
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show password"
+            android:textOff="Show password"
+            android:textOn="Hide password"
+            android:id="@+id/password_toggle"
+            android:layout_below="@id/editText_register_confirm_password"/>
+
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Register"
+    android:layout_below="@id/password_toggle"
+    android:layout_marginRight="70dp"
+    android:layout_marginLeft="70dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:id="@+id/register_button"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/register_button"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/already_have_account"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="20dp"
+                android:text="Already have an account?"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/textview_login"
+                android:layout_width="114dp"
+                android:layout_height="51dp"
+                android:layout_marginBottom="20dp"
+                android:clickable="true"
+                android:text=" Login"
+                android:textColor="@color/purple_200"
+                android:textSize="24dp" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Animation.Design.BottomSheetDialog"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:elevation="10dp"
+            android:visibility="gone"
+            android:id="@+id/progressbar"/>
+    </RelativeLayout>
+</ScrollView>
