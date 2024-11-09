@@ -37,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextPassword;
     private ToggleButton passwordToggle;
     private Button loginButton;
-    private ProgressBar progressBar;
     private FirebaseAuth authProfile;
     private static final String TAG = "LoginActivity";
 
@@ -52,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.editText_login_password);
         passwordToggle = findViewById(R.id.password_toggle);
         loginButton = findViewById(R.id.login_button);
-        progressBar = findViewById(R.id.progressbar);
+
 
         authProfile = FirebaseAuth.getInstance();
 
@@ -78,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                     editTextPassword.requestFocus();
                 } else {
 
-                    progressBar.setVisibility(View.VISIBLE);
+
                     loginUser(textEmail,textPassword);
                 }
 
@@ -105,7 +104,10 @@ public class LoginActivity extends AppCompatActivity {
 
                         //open user profile
 
+                        //Start UserProfileActivity
 
+                        startActivity(new Intent(LoginActivity.this,UserProfileActivity.class));
+                        finish(); //Close LoginActivity
                     }else {
                         firebaseUser.sendEmailVerification();
                         authProfile.signOut();
@@ -132,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 }
-                progressBar.setVisibility(View.GONE);
+
             }
         });
     }
@@ -167,10 +169,7 @@ public class LoginActivity extends AppCompatActivity {
         if (authProfile.getCurrentUser() !=null) {
             Toast.makeText(LoginActivity.this, "You are already logged in!", Toast.LENGTH_SHORT).show();
 
-            //Start UserProfileActivity
 
-            startActivity(new Intent(LoginActivity.this,ParentDashboardActivity.class));
-            finish(); //Close LoginActivity
 
         } else {
             Toast.makeText(LoginActivity.this, "You can log in!", Toast.LENGTH_SHORT).show();

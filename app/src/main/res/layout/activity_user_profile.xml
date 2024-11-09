@@ -26,18 +26,7 @@
                     android:layout_centerInParent="true"
                     android:background="@drawable/pro"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/profile"
-                    android:layout_alignStart="@+id/profile_dp"
-                    android:layout_below="@+id/profile_dp"
-                    android:hint="Loading..."
-                    android:layout_marginStart="20dp"
-                    android:textColor="@color/white"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                    android:layout_marginTop="5dp"
-                    android:textSize="24dp"/>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -145,6 +134,34 @@
                     android:layout_below="@+id/divider3"
                     android:layout_marginStart="50dp"
                     android:textSize="24dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/show_role"
+                    android:background="@color/purple_700"
+                    android:id="@+id/divider4"/>
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/email"
+                    android:id="@+id/profile_IdNumber"
+                    android:layout_marginTop="30dp"
+                    android:layout_below="@+id/show_role"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/show_IdNumber"
+                    android:layout_alignStart="@+id/profile_email"
+                    android:hint="Loading"
+                    android:layout_marginTop="30dp"
+                    android:layout_below="@+id/show_role"
+                    android:layout_marginStart="50dp"
+                    android:textSize="24dp"/>
+
 
                 <ProgressBar
                     android:layout_width="wrap_content"

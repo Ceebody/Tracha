@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button registerButton;
     private ToggleButton passwordToggle;
     private TextView loginTextView;
-    private ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
         radioParent = findViewById(R.id.radio_parent);
         radioDriver = findViewById(R.id.radio_driver);
         passwordToggle = findViewById(R.id.password_toggle);
-        progressBar = findViewById(R.id.progressbar);
+
 
         // Set up the click listener for the Login TextView
         loginTextView.setOnClickListener(v -> {
@@ -111,11 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
             String password = editTextPassword.getText().toString().trim();
             String confirmPassword = editTextConfirmPassword.getText().toString().trim();
 
-            //Validate contact number using matcher and pattern
-            String mobileRegex = "[0-5][2-9][9]"; //First digit must always begin with "0"
-            Matcher mobileMatcher;
-            Pattern mobilePattern = Pattern.compile(mobileRegex);
-            mobileMatcher = mobilePattern.matcher(contactNumber);
+
 
             if (TextUtils.isEmpty(fullName)) {
                 Toast.makeText(RegisterActivity.this, "Please enter your full name", Toast.LENGTH_SHORT).show();
@@ -157,11 +153,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             } else if (contactNumber.length() !=10){
                 Toast.makeText(RegisterActivity.this, "Contact mobile number must be ten digits", Toast.LENGTH_SHORT).show();
-                editTextContactNumber.setError("Re-enter your contact number");
-                editTextContactNumber.requestFocus();
-                
-            } else if (!mobileMatcher.find()) {
-                Toast.makeText(RegisterActivity.this, "Invalid Contact number", Toast.LENGTH_SHORT).show();
                 editTextContactNumber.setError("Re-enter your contact number");
                 editTextContactNumber.requestFocus();
                 
