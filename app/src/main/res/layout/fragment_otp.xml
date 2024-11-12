@@ -1,16 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".OtpFragment">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal"
+    tools:context=".VerifyOtpFragment"
+    android:background="@color/teal_700">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Request OTP"
-            android:gravity="center"
-            android:textSize="34dp"/>
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_marginTop="-220dp"
+        android:foregroundGravity="center"
+        android:src="@drawable/logo" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:text="Enter Mobile Number"
+        android:textSize="20sp"
+        android:padding="15dp"
+        android:background="@drawable/border"
+        />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/border"
+        android:inputType="number"
+        android:maxLines="1"
+        android:padding="15dp"
+        android:text="Enter OTP"
+        android:textSize="20sp" />
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button"
+        android:layout_marginTop="220dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SEND OTP"
+        android:textSize="20sp"
+        android:background="@color/purple_200"/>
+
+
+</RelativeLayout>
