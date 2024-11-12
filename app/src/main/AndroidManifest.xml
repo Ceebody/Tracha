@@ -32,6 +32,9 @@
             android:name=".ConfirmActivityFragment"
             android:exported="true" />
         <activity
+            android:name=".OtpActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserProfileActivity"
             android:exported="false" />
         <activity
