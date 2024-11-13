@@ -15,9 +15,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize the Toolbar and set it as the ActionBar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         // Check  ActionBar before setting its title
         if (getSupportActionBar() != null) {
@@ -35,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Open Register Activity
-        Button buttonRegister = findViewById(R.id.button_register);
+        Button buttonRegister = findViewById(R.id.register_button);
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

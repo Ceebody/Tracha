@@ -1,69 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_marginTop="30dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/gradient_background">
+
+ <androidx.cardview.widget.CardView
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_margin="30dp"
+     app:cardCornerRadius="30dp"
+     app:cardElevation="20dp">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:orientation="vertical"
+      android:padding="24dp">
 
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:layout_margin="15dp"
-        android:background="@color/white">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_marginBottom="20dp"
-            android:background="@color/purple_500"
-            android:elevation="4dp"
-            app:titleTextColor="@color/white"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo"
-            android:id="@+id/image"
-            android:maxHeight="300dp"
-            android:maxWidth="300dp"
-            android:layout_marginTop="80dp"
-            android:adjustViewBounds="true"
-            android:layout_centerHorizontal="true"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Welcome To Tracha"
-            android:id="@+id/welcome"
-            android:layout_marginTop="15dp"
-            android:textAlignment="center"
-            android:layout_below="@+id/image"
-            android:textSize="40dp"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/welcome"
-            android:layout_marginLeft="70dp"
-            android:id="@+id/button_login"
-            android:layout_marginTop="100dp"
-            android:layout_marginRight="70dp"
-            android:text="Login"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/button_login"
-            android:layout_marginLeft="70dp"
-            android:id="@+id/button_register"
-            android:layout_marginRight="70dp"
-            android:layout_marginTop="20dp"
-            android:text="Register"/>
-    </RelativeLayout>
+   <ImageView
+       android:layout_width="340dp"
+       android:layout_height="220dp"
+       android:layout_gravity="center"
+       android:src="@drawable/logo" />
 
 
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:fontFamily="@font/almendra_bold_italic"
+       android:text="Welcome To Tracha"
+       android:textAlignment="center"
+       android:textSize="50sp" />
 
-</ScrollView>
+   <Button
+       android:id="@+id/button_login"
+       android:layout_width="match_parent"
+       android:layout_height="60dp"
+       android:text="Login"
+       android:textSize="20dp"
+       android:backgroundTint="#E7BF94"
+       android:fontFamily="@font/abril_fatface"
+       app:cornerRadius="20dp"/>
+
+   <Button
+       android:id="@+id/register_button"
+       android:layout_width="match_parent"
+       android:layout_height="60dp"
+       android:text="Register"
+       android:layout_marginTop="12dp"
+       android:textSize="20dp"
+       android:backgroundTint="#B5D3E7"
+       android:fontFamily="@font/abril_fatface"
+       app:cornerRadius="20dp"/>
+
+  </LinearLayout>
+ </androidx.cardview.widget.CardView>
+</LinearLayout>
