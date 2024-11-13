@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,13 +22,11 @@
       android:orientation="vertical"
       android:padding="24dp">
 
-
    <ImageView
        android:layout_width="340dp"
        android:layout_height="220dp"
        android:layout_gravity="center"
        android:src="@drawable/logo" />
-
 
    <TextView
        android:layout_width="match_parent"
@@ -39,26 +36,26 @@
        android:textAlignment="center"
        android:textSize="50sp" />
 
-   <Button
+   <com.google.android.material.button.MaterialButton
        android:id="@+id/button_login"
        android:layout_width="match_parent"
        android:layout_height="60dp"
        android:text="Login"
-       android:textSize="20dp"
+       android:textSize="20sp"
        android:backgroundTint="#E7BF94"
        android:fontFamily="@font/abril_fatface"
-       app:cornerRadius="20dp"/>
+       app:cornerRadius="20dp" />
 
-   <Button
+   <com.google.android.material.button.MaterialButton
        android:id="@+id/register_button"
        android:layout_width="match_parent"
        android:layout_height="60dp"
        android:text="Register"
        android:layout_marginTop="12dp"
-       android:textSize="20dp"
+       android:textSize="20sp"
        android:backgroundTint="#B5D3E7"
        android:fontFamily="@font/abril_fatface"
-       app:cornerRadius="20dp"/>
+       app:cornerRadius="20dp" />
 
   </LinearLayout>
  </androidx.cardview.widget.CardView>

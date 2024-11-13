@@ -35,7 +35,7 @@
             android:name=".OtpActivity"
             android:exported="false" />
         <activity
-            android:name=".UserProfileActivity"
+            android:name=".ReadWriteUserDetails$UserProfileActivity"
             android:exported="false" />
         <activity
             android:name=".DriverRegistrationFragment"
