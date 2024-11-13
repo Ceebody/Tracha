@@ -6,12 +6,12 @@
 
     <group android:checkableBehavior="single">
         <item android:id="@+id/home"
-            android:title="Home"
+            android:title="Driver_Home"
             android:icon="@drawable/home"/>
         <item android:id="@+id/reg"
             android:title="Maps and Locations"
             android:icon="@drawable/maps"/>
-        <item android:id="@+id/trackdriver"
+        <item android:id="@+id/maps"
             android:title="Confirm Activity"
             android:icon="@drawable/confirm_activity"/>
         <item android:id="@+id/otp"

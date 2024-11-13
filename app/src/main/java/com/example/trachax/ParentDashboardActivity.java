@@ -32,7 +32,7 @@ public class ParentDashboardActivity extends AppCompatActivity {
                         selectedFragment = new HomeFragment();
                         break;
                     case R.id.reg:
-                        selectedFragment = new DriverRegistrationFragment();
+                        selectedFragment = new Fragment();
                         break;
                     case R.id.trackdriver:
                         selectedFragment = new TrackDriverFragment();
