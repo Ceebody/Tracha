@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String textEmail = editTextEmail.getText().toString();
                 String textPassword = editTextPassword.getText().toString();
-
                 if (TextUtils.isEmpty(textEmail)) {
                     Toast.makeText(LoginActivity.this, "Please enter email address", Toast.LENGTH_SHORT).show();
                     editTextEmail.setError("Email address required");
