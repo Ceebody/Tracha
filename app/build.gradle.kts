@@ -48,9 +48,13 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.inappmessaging)
     implementation(libs.play.services.maps)
+    implementation(libs.legacy.support.v4)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation(libs.ccp)
+
+
 
 
 }
