@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "914440906583",
+    "project_id": "tracha-xx",
+    "storage_bucket": "tracha-xx.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914440906583:android:71341b2c4f69c8c04d8012",
+        "android_client_info": {
+          "package_name": "com.example.trachax"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi2Vp_rNI5W04wa9OqtP6aVwj28l2q7Io"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
