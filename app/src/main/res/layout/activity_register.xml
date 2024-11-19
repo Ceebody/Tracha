@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
-        android:layout_margin="15dp"
+        android:layout_margin="5dp"
         android:background="@color/white">
 
         <TextView
@@ -23,45 +24,13 @@
             android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Select Role"
-            android:id="@+id/textView_selection"
-            android:layout_below="@+id/textView_register_head"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:layout_marginTop="10dp"/>
 
-       <RadioGroup
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal"
-           android:layout_below="@+id/textView_selection"
-           android:id="@+id/radio"
-           android:gravity="center">
-
-           <RadioButton
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:id="@+id/radio_parent"
-               android:text="Parent"
-               android:textSize="20dp"
-               android:textColor="#555555"/>
-           <RadioButton
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:id="@+id/radio_driver"
-               android:text="Driver"
-               android:textSize="20dp"
-               android:textColor="#555555"/>
-       </RadioGroup>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView_register_full_name"
             android:text="Full Name*"
-            android:layout_below="@+id/radio"
+            android:layout_below="@+id/textView_register_head"
             android:textColor="#555555"
             android:textSize="24sp"
             android:padding="6dp"
@@ -72,6 +41,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/editText_register_full_name"
             android:hint="Surname first"
+            android:elevation="5dp"
             android:inputType="textPersonName"
             android:textSize="27sp"
             android:padding="6dp"
@@ -95,6 +65,7 @@
             android:id="@+id/editText_register_id_number"
             android:hint="ID Number"
             android:inputType="textCapCharacters"
+            android:elevation="5dp"
             android:textSize="27sp"
             android:padding="6dp"
             android:background="@drawable/border"
@@ -111,39 +82,42 @@
             android:layout_below="@+id/editText_register_id_number"
             android:layout_marginTop="30dp"/>
 
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText_register_contact_number"
-            android:hint="contact"
-            android:inputType="textPersonName"
-            android:textSize="27sp"
-            android:padding="6dp"
-            android:background="@drawable/border"
-            android:layout_below="@+id/textView_register_contact_number"/>
+            android:layout_margin="10dp"
+            android:weightSum="10"
+            android:id="@+id/contact_layout"
+            android:layout_below="@+id/textView_register_contact_number"
+            android:gravity="center">
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView_register_car_number"
-            android:text="Car Number*"
-            android:textColor="#555555"
-            android:textSize="24sp"
-            android:padding="6dp"
-            android:layout_below="@+id/editText_register_contact_number"
-            android:layout_marginTop="30dp"/>
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="131dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:elevation="5dp"
+                android:padding="10dp"
+                app:ccp_defaultPhoneCode="233"
+                app:ccp_arrowSize="25dp"
+                app:ccp_showFlag="true"
+                app:ccp_textSize="10dp" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText_register_car_number"
-            android:hint="Car number"
-            android:inputType="textCapSentences"
-            android:textSize="27sp"
-            android:padding="6dp"
-            android:background="@drawable/border"
-            android:layout_below="@+id/textView_register_car_number"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:padding="10dp"
+                android:inputType="phone"
+                android:hint="Phone number"
+                android:layout_margin="10dp"
+                android:id="@+id/phone"
+                android:elevation="5dp"
+                android:background="@drawable/border"/>
+
+        </LinearLayout>
+
 
         <TextView
             android:layout_width="match_parent"
@@ -153,7 +127,7 @@
             android:textColor="#555555"
             android:textSize="24sp"
             android:padding="6dp"
-            android:layout_below="@+id/editText_register_car_number"
+            android:layout_below="@+id/contact_layout"
             android:layout_marginTop="30dp"/>
 
         <EditText
@@ -163,6 +137,7 @@
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:textSize="27sp"
+            android:elevation="5dp"
             android:padding="6dp"
             android:background="@drawable/border"
             android:layout_below="@+id/textView_register_email"/>
@@ -184,6 +159,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/editText_register_password"
             android:hint="password"
+            android:elevation="5dp"
             android:inputType="textPassword"
             android:textSize="27sp"
             android:padding="6dp"
@@ -207,6 +183,7 @@
             android:id="@+id/editText_register_confirm_password"
             android:hint="confirm password"
             android:inputType="textPassword"
+            android:elevation="5dp"
             android:textSize="27sp"
             android:padding="6dp"
             android:background="@drawable/border"

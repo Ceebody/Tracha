@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".ParentLoginActivity"
+    android:layout_margin="20dp"
+    android:weightSum="100"
+    tools:ignore="ExtraText">
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="20"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WELCOME BACK"
+            android:letterSpacing="0.08"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:layout_weight="5"
+            android:textSize="25dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kindly login with your credentials"
+        android:letterSpacing="0.08"
+        android:textAlignment="center"
+        android:layout_margin="5dp"
+        android:layout_weight="5"
+        android:textSize="18dp"/>
+
+
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/phone"
+        android:layout_weight="20"/>
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
+        android:layout_margin="10dp"
+        android:id="@+id/email_parent"
+        android:elevation="10dp"
+        android:background="@drawable/border"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:layout_margin="10dp"
+        android:id="@+id/password_parent"
+        android:elevation="10dp"
+        android:background="@drawable/border"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:layout_weight="70"
+        android:gravity="center_vertical">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:id="@+id/parent_login_btn"
+            android:layout_margin="10dp"
+            android:text="Login"
+            android:background="@drawable/border_2"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="20"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Don't have an account?"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="Sign up"
+                android:textSize="18dp"
+                android:id="@+id/signup_parent"
+                android:layout_marginStart="10dp"
+                android:clickable="true"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/progress_bar_parent"
+            android:indeterminateTint="@color/teal_700"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -15,8 +15,13 @@ firebaseAuth = "23.1.0"
 firebaseDatabase = "21.0.0"
 firebaseInappmessaging = "21.0.1"
 playServicesMaps = "19.0.0"
- version = "2.7.0"
 legacySupportV4 = "1.0.0"
+firebaseFirestore = "25.1.1"
+firebaseStorage = "21.0.1"
+firebaseAppcheckPlayintegrity = "18.0.0"
+play-services-auth = "19.0.0"
+play-services-auth-api-phone = "18.1.0"
+googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
 
 
 [libraries]
@@ -36,8 +41,16 @@ firebase-database = { group = "com.google.firebase", name = "firebase-database",
 firebase-inappmessaging = { group = "com.google.firebase", name = "firebase-inappmessaging", version.ref = "firebaseInappmessaging" }
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
 legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
+firebase-appcheck-playintegrity = { group = "com.google.firebase", name = "firebase-appcheck-playintegrity", version.ref = "firebaseAppcheckPlayintegrity" }
+play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "play-services-auth" }
+play-services-auth-api-phone = { group = "com.google.android.gms", name = "play-services-auth-api-phone", version.ref = "play-services-auth-api-phone" }
+
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
+google-android-libraries-mapsplatform-secrets-gradle-plugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "googleAndroidLibrariesMapsplatformSecretsGradlePlugin" }
 

@@ -42,7 +42,7 @@
        android:layout_height="60dp"
        android:text="Login"
        android:textSize="20sp"
-       android:backgroundTint="#E7BF94"
+       android:backgroundTint="#DB9347"
        android:fontFamily="@font/abril_fatface"
        app:cornerRadius="20dp" />
 
@@ -53,7 +53,7 @@
        android:text="Register"
        android:layout_marginTop="12dp"
        android:textSize="20sp"
-       android:backgroundTint="#B5D3E7"
+       android:backgroundTint="#065A92"
        android:fontFamily="@font/abril_fatface"
        app:cornerRadius="20dp" />
 

@@ -1,6 +1,7 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.application) // Android application plugin
     alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin) // Google services plugin
 }
 
 android {
@@ -26,17 +27,21 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    buildFeatures{
-        viewBinding=true
+
+
+
+    buildFeatures {
+        viewBinding = true // Enable View Binding
     }
 }
 
 dependencies {
-
+    // AndroidX and Material Components
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -44,17 +49,25 @@ dependencies {
     implementation(libs.fragment)
     implementation(libs.core)
     implementation(libs.support.annotations)
+    implementation(libs.legacy.support.v4)
+
+    // Firebase SDKs
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage)
     implementation(libs.firebase.inappmessaging)
+    implementation(libs.firebase.appcheck.playintegrity)
+
+    // Google Play Services
     implementation(libs.play.services.maps)
-    implementation(libs.legacy.support.v4)
+    implementation(libs.play.services.auth)
+    implementation(libs.play.services.auth.api.phone)
+    // Third-party Libraries
+    implementation(libs.ccp) // Country Code Picker
+
+    // Testing Libraries
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation(libs.ccp)
-
-
-
-
 }

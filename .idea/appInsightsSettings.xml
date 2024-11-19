@@ -10,9 +10,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.example.trachax" />
-                  <option name="mobileSdkAppId" value="1:486522282416:android:7fb4ce424abd6b8948f675" />
-                  <option name="projectId" value="tracha-x" />
-                  <option name="projectNumber" value="486522282416" />
+                  <option name="mobileSdkAppId" value="1:914440906583:android:71341b2c4f69c8c04d8012" />
+                  <option name="projectId" value="tracha-xx" />
+                  <option name="projectNumber" value="914440906583" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

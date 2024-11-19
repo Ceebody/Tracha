@@ -2,139 +2,94 @@ package com.example.trachax;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.trachax.LoginRoles;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText editText_register_contact_number, editText_register_full_name, editText_register_id_number, editText_register_car_number, editText_register_password, editText_register_confirm_password;
-    private Button register_button;
-    private String phoneNumber;
-    private RadioGroup radioGroup;
-    private RadioButton radioParent, radioDriver;
-    private TextView textview_login, textView_register_car_number;
+    private EditText fullName, idNumber, contactNumber, email, password, confirmPassword;
+    private ToggleButton passwordToggle;
+    private Button registerButton;
+    private TextView loginLink;
+    private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Initialize views
-        editText_register_contact_number = findViewById(R.id.editText_register_contact_number);
-        editText_register_car_number = findViewById(R.id.editText_register_car_number);
-        editText_register_password = findViewById(R.id.editText_register_password);
-        editText_register_confirm_password = findViewById(R.id.editText_register_confirm_password);
-        editText_register_id_number = findViewById(R.id.editText_register_id_number);
-        editText_register_full_name = findViewById(R.id.editText_register_full_name);
-        register_button = findViewById(R.id.register_button);
-        radioGroup = findViewById(R.id.radio);
-        radioParent = findViewById(R.id.radio_parent);
-        radioDriver = findViewById(R.id.radio_driver);
-        textview_login = findViewById(R.id.textview_login);
-        textView_register_car_number = findViewById(R.id.textView_register_car_number);
+        // Initialize the DBHelper
+        dbHelper = new DatabaseHelper(this);
 
-        // Initially disable input fields until a role is selected
-        toggleFields(false);
-        Toast.makeText(this, "Please select your role", Toast.LENGTH_SHORT).show();
+        // Initialize UI components
+        fullName = findViewById(R.id.editText_register_full_name);
+        idNumber = findViewById(R.id.editText_register_id_number);
+        contactNumber = findViewById(R.id.phone);
+        email = findViewById(R.id.editText_register_email);
+        password = findViewById(R.id.editText_register_password);
+        confirmPassword = findViewById(R.id.editText_register_confirm_password);
+        passwordToggle = findViewById(R.id.password_toggle);
+        registerButton = findViewById(R.id.register_button);
+        loginLink = findViewById(R.id.textview_login);
 
-        // Role selection logic
-        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.radio_parent) {
-                toggleFields(true);
-                editText_register_car_number.setVisibility(View.GONE);
-                textView_register_car_number.setVisibility(View.GONE);
-            } else if (checkedId == R.id.radio_driver) {
-                toggleFields(true);
-                editText_register_car_number.setVisibility(View.VISIBLE);
-                textView_register_car_number.setVisibility(View.VISIBLE);
+        // Password visibility toggle
+        passwordToggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                password.setInputType(0x00000091); // Show password
+                confirmPassword.setInputType(0x00000091); // Show password
+            } else {
+                password.setInputType(0x00000081); // Hide password
+                confirmPassword.setInputType(0x00000081); // Hide password
             }
         });
 
-        // Register button click listener
-        register_button.setOnClickListener(v -> {
-            String fullName = editText_register_full_name.getText().toString().trim();
-            String idNumber = editText_register_id_number.getText().toString().trim();
-            String password = editText_register_password.getText().toString().trim();
-            String confirmPassword = editText_register_confirm_password.getText().toString().trim();
-            phoneNumber = editText_register_contact_number.getText().toString().trim();
+        // Handle registration logic
+        registerButton.setOnClickListener(v -> registerUser());
 
-            // Validation for all required fields
-            if (fullName.isEmpty()) {
-                editText_register_full_name.setError("Please enter your full name");
-                editText_register_full_name.requestFocus();
-                return;
-            }
-
-            if (idNumber.isEmpty()) {
-                editText_register_id_number.setError("Please enter your ID number");
-                editText_register_id_number.requestFocus();
-                return;
-            }
-
-            if (phoneNumber.isEmpty()) {
-                editText_register_contact_number.setError("Please enter your contact number");
-                editText_register_contact_number.requestFocus();
-                return;
-            }
-
-            if (password.isEmpty() || confirmPassword.isEmpty()) {
-                Toast.makeText(RegisterActivity.this, "Please enter your password", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (!password.equals(confirmPassword)) {
-                Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            // Role selection check
-            int selectedId = radioGroup.getCheckedRadioButtonId();
-            if (selectedId == -1) {
-                Toast.makeText(RegisterActivity.this, "Please select a role", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            // Proceed to PhoneActivity for OTP verification
-            Intent intent = new Intent(RegisterActivity.this, PhoneActivity.class);
-            intent.putExtra("phone_number", "+233" + phoneNumber);
+        // Navigate to login
+        loginLink.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginRoles.class);
             startActivity(intent);
         });
-
-        // Login page navigation
-        textview_login.setOnClickListener(v -> startActivity(new Intent(RegisterActivity.this, LoginActivity.class)));
-
-        // Show/Hide password logic
-        findViewById(R.id.password_toggle).setOnClickListener(v -> togglePasswordVisibility());
     }
 
-    // Method to enable/disable fields
-    private void toggleFields(boolean enable) {
-        editText_register_contact_number.setEnabled(enable);
-        editText_register_car_number.setEnabled(enable);
-        editText_register_password.setEnabled(enable);
-        editText_register_confirm_password.setEnabled(enable);
-        register_button.setEnabled(enable);
-        editText_register_id_number.setEnabled(enable);
-        editText_register_full_name.setEnabled(enable);
-    }
+    private void registerUser() {
+        String name = fullName.getText().toString();
+        String id = idNumber.getText().toString();
+        String contact = contactNumber.getText().toString();
+        String userEmail = email.getText().toString();
+        String userPassword = password.getText().toString();
+        String userConfirmPassword = confirmPassword.getText().toString();
 
-    // Toggle password visibility
-    private void togglePasswordVisibility() {
-        if (editText_register_password.getInputType() == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
-            editText_register_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            editText_register_confirm_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-        } else {
-            editText_register_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            editText_register_confirm_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        // Validate inputs
+        if (name.isEmpty() || id.isEmpty() || contact.isEmpty() || userEmail.isEmpty() || userPassword.isEmpty() || userConfirmPassword.isEmpty()) {
+            Toast.makeText(this, "Please fill all required fields.", Toast.LENGTH_SHORT).show();
+            return;
         }
-        editText_register_password.setSelection(editText_register_password.getText().length());
-        editText_register_confirm_password.setSelection(editText_register_confirm_password.getText().length());
+
+        if (!userPassword.equals(userConfirmPassword)) {
+            Toast.makeText(this, "Passwords do not match.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Save to DB
+        boolean isInserted = dbHelper.insertUser(name, id, contact, userEmail, userPassword);
+
+        if (isInserted) {
+            Toast.makeText(this, "Registration successful! Please log in.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(RegisterActivity.this, LoginRoles.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(this, "Registration failed! Try again.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

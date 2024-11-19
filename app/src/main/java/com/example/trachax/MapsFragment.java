@@ -1,76 +1,57 @@
 package com.example.trachax;
 
-import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsFragment extends Fragment implements OnMapReadyCallback {
+public class MapsFragment extends Fragment {
 
-    private MapView mapView;
-    private GoogleMap googleMap;
+    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+
+        /**
+         * Manipulates the map once available.
+         * This callback is triggered when the map is ready to be used.
+         * This is where we can add markers or lines, add listeners or move the camera.
+         * In this case, we just add a marker near Sydney, Australia.
+         * If Google Play services is not installed on the device, the user will be prompted to
+         * install it inside the SupportMapFragment. This method will only be triggered once the
+         * user has installed Google Play services and returned to the app.
+         */
+        @Override
+        public void onMapReady(GoogleMap googleMap) {
+            LatLng sydney = new LatLng(-34, 151);
+            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        }
+    };
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_maps, container, false);
-
-        mapView = view.findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(this);
-
-        return view;
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_maps, container, false);
     }
 
     @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-        this.googleMap = googleMap;
-
-        // Center the map on a specific location, e.g., New York City
-        LatLng location = new LatLng(40.7128, -74.0060); // Replace with desired coordinates
-        googleMap.addMarker(new MarkerOptions().position(location).title("Marker in New York"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10));
-    }
-
-    // MapView lifecycle methods
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        SupportMapFragment mapFragment =
+                (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(callback);
+        }
     }
 }

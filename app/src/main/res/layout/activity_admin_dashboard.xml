@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".AdminDashboardActivity"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/parent_overview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Parents Overview"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="16dp" />
+
+    <TextView
+        android:id="@+id/driver_overview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Drivers Overview"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+</LinearLayout>
