@@ -1,61 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="30dp"
-    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/gradient_background">
+    android:gravity="center"
+    android:background="@drawable/gradient_background"
+    android:padding="16dp">
 
  <androidx.cardview.widget.CardView
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
-     android:layout_margin="30dp"
-     app:cardCornerRadius="30dp"
-     app:cardElevation="20dp">
+     android:layout_margin="16dp"
+     app:cardCornerRadius="16dp"
+     app:cardElevation="8dp">
 
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
       android:orientation="vertical"
-      android:padding="24dp">
+      android:padding="16dp"
+      android:gravity="center">
 
+   <!-- Logo Image -->
    <ImageView
-       android:layout_width="340dp"
+       android:layout_width="wrap_content"
        android:layout_height="220dp"
-       android:layout_gravity="center"
-       android:src="@drawable/logo" />
+       android:src="@drawable/logo"
+       android:contentDescription="App Logo"
+       android:adjustViewBounds="true"
+       android:scaleType="centerInside"
+       android:layout_gravity="center" />
 
+   <!-- Welcome Text -->
    <TextView
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:fontFamily="@font/almendra_bold_italic"
        android:text="Welcome To Tracha"
        android:textAlignment="center"
-       android:textSize="50sp" />
+       android:textSize="24sp"
+       android:fontFamily="@font/almendra_bold_italic"
+       android:textColor="@color/black"
+       android:layout_marginTop="16dp" />
 
-   <com.google.android.material.button.MaterialButton
+   <!-- Login Button -->
+   <Button
        android:id="@+id/button_login"
-       android:layout_width="match_parent"
-       android:layout_height="60dp"
+       android:layout_width="200dp"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center"
+       android:layout_marginTop="24dp"
+      android:backgroundTint="@color/teal_700"
        android:text="Login"
-       android:textSize="20sp"
-       android:backgroundTint="#DB9347"
-       android:fontFamily="@font/abril_fatface"
-       app:cornerRadius="20dp" />
+       android:textColor="@color/white"
+       android:textSize="16sp"
+       android:fontFamily="@font/abril_fatface" />
 
-   <com.google.android.material.button.MaterialButton
+   <!-- Register Button -->
+   <Button
        android:id="@+id/register_button"
-       android:layout_width="match_parent"
-       android:layout_height="60dp"
+       android:layout_width="200dp"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center"
+       android:layout_marginTop="16dp"
+       android:backgroundTint="@color/teal_700"
        android:text="Register"
-       android:layout_marginTop="12dp"
-       android:textSize="20sp"
-       android:backgroundTint="#065A92"
-       android:fontFamily="@font/abril_fatface"
-       app:cornerRadius="20dp" />
+       android:textColor="@color/white"
+       android:textSize="16sp"
+       android:fontFamily="@font/abril_fatface" />
 
   </LinearLayout>
  </androidx.cardview.widget.CardView>

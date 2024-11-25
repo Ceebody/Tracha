@@ -30,37 +30,41 @@
 
 
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/button_login"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
                 android:text="Login as admin"
-                android:textSize="20sp"
-                android:backgroundTint="#DB9347"
-                android:fontFamily="@font/abril_fatface"
-                app:cornerRadius="20dp" />
+                android:backgroundTint="@color/purple_200"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:fontFamily="@font/abril_fatface" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/register_button"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="Login as parent"
-                android:layout_marginTop="12dp"
-                android:textSize="20sp"
-                android:backgroundTint="#065A92"
-                android:fontFamily="@font/abril_fatface"
-                app:cornerRadius="20dp" />
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:text="Login as Parent"
+                android:backgroundTint="@color/teal_200"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:fontFamily="@font/abril_fatface" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/driver_button"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
                 android:text="Login as driver"
-                android:layout_marginTop="12dp"
-                android:textSize="20sp"
-                android:backgroundTint="#065A92"
-                android:fontFamily="@font/abril_fatface"
-                app:cornerRadius="20dp" />
+                android:backgroundTint="@color/teal_700"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:fontFamily="@font/abril_fatface" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

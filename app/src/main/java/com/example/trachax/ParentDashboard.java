@@ -1,9 +1,7 @@
 package com.example.trachax;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -22,7 +20,7 @@ public class ParentDashboard extends AppCompatActivity {
             Fragment selectedFragment = null;
             switch (item.getItemId()) {
                 case R.id.home:
-                    selectedFragment = new HomeFragment();
+                    selectedFragment = new ParentHomeFragment();
                     break;
                 case R.id.reg:
                     selectedFragment = new RegisterFragment(); // Ensure this is the correct fragment
@@ -34,7 +32,7 @@ public class ParentDashboard extends AppCompatActivity {
                     selectedFragment = new OtpFragment();
                     break;
                 case R.id.logout:
-                    selectedFragment = new LogoutFragment(); // Ensure this fragment is defined
+                    selectedFragment = new LogoutActivity(); // Ensure this fragment is defined
                     break;
             }
             if (selectedFragment != null) {

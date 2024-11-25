@@ -2,14 +2,16 @@ package com.example.trachax;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 
 public class LoginRoles extends AppCompatActivity {
 
-    private MaterialButton adminButton;
-    private MaterialButton parentButton;
-    private MaterialButton driverButton;
+    private Button adminButton;
+    private Button parentButton;
+    private Button driverButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

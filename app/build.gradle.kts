@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application) // Android application plugin
     alias(libs.plugins.google.gms.google.services)
-    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin) // Google services plugin
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin) // Google services plugin d
+
 }
 
 android {
@@ -56,18 +57,22 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.storage)
-    implementation(libs.firebase.inappmessaging)
     implementation(libs.firebase.appcheck.playintegrity)
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
 
     // Google Play Services
     implementation(libs.play.services.maps)
     implementation(libs.play.services.auth)
     implementation(libs.play.services.auth.api.phone)
+
     // Third-party Libraries
-    implementation(libs.ccp) // Country Code Picker
+    implementation(libs.ccp)
+    implementation(libs.androidx.gridlayout)
 
     // Testing Libraries
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation(libs.google.maps)
+    implementation(libs.androidx.fragment)
 }

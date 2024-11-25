@@ -22,7 +22,7 @@ public class OtpFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the fragment layout
-        View view = inflater.inflate(R.layout.fragment_verify_otp, container, false);
+        View view = inflater.inflate(R.layout.activity_verify_otp, container, false);
 
         // Initialize views
         editTextMobileNumber = view.findViewById(R.id.editText1);
@@ -57,13 +57,11 @@ public class OtpFragment extends Fragment {
             return;
         }
 
-        // Here, you would call your API or Firebase to send OTP
-        // For now, let's simulate sending the OTP
+        // simulate sending the OTP
         Toast.makeText(getActivity(), "OTP Sent to " + mobileNumber, Toast.LENGTH_SHORT).show();
 
-        // Optionally, you can navigate to another fragment or screen to verify OTP
-        // Example:
-        // NavController navController = Navigation.findNavController(view);
+
+        //NavController navController = Navigation.findNavController(view);
         // navController.navigate(R.id.action_verifyOtpFragment_to_verifyOtpCodeFragment);
     }
 }

@@ -2,10 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp"
+    tools:context="VerifyOtpActivity">
 
     <TextView
-        android:id="@+id/fragment_track_driver"
+        android:id="@+id/fragment_verify_otp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fragment Content"

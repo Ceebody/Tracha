@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.trachax.DriverDashboardActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -87,7 +86,7 @@ public class DriverLoginActivity extends AppCompatActivity {
                     Toast.makeText(DriverLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
                     // Navigate to DriverDashboardActivity
-                    Intent intent = new Intent(DriverLoginActivity.this, DriverDashboardActivity.class);
+                    Intent intent = new Intent(DriverLoginActivity.this, DriverHomeActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
