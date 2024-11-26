@@ -5,18 +5,11 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="horizontal"
-    tools:context=".VerifyOtpActivity"
+    tools:context=".ParentOtpActivity"
     android:background="@color/teal_700">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:layout_marginTop="-220dp"
-        android:foregroundGravity="center"
-        android:src="@drawable/logo" />
 
     <EditText
         android:id="@+id/editText1"
@@ -25,7 +18,7 @@
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:maxLines="1"
-        android:text="Enter Mobile Number"
+        android:hint="Enter Mobile Number"
         android:textSize="20sp"
         android:padding="15dp"
         android:background="@drawable/border"
@@ -40,7 +33,7 @@
         android:inputType="number"
         android:maxLines="1"
         android:padding="15dp"
-        android:text="Enter OTP"
+        android:hint="Enter OTP"
         android:textSize="20sp" />
     <ProgressBar
         android:layout_width="wrap_content"

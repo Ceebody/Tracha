@@ -1,9 +1,7 @@
-plugins {
-    alias(libs.plugins.android.application) // Android application plugin
-    alias(libs.plugins.google.gms.google.services)
-    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin) // Google services plugin d
-
-}
+    plugins {
+        id("com.android.application") version libs.versions.agp.get()
+        id("com.google.gms.google-services") version libs.versions.googleGmsGoogleServices.get()
+    }
 
 android {
     namespace = "com.example.trachax"
@@ -34,8 +32,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-
-
     buildFeatures {
         viewBinding = true // Enable View Binding
     }
@@ -43,36 +39,34 @@ android {
 
 dependencies {
     // AndroidX and Material Components
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.fragment)
+    implementation(libs.fragmentKtx) // Using fragment-ktx for modern fragments
     implementation(libs.core)
-    implementation(libs.support.annotations)
-    implementation(libs.legacy.support.v4)
+    implementation(libs.androidx.gridlayout)
 
     // Firebase SDKs
+    implementation(platform(libs.firebase.bom)) // BoM ensures consistent Firebase versions
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.storage)
     implementation(libs.firebase.appcheck.playintegrity)
-    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
 
     // Google Play Services
-    implementation(libs.play.services.maps)
+    implementation(libs.google.maps) // Deduplicate if overlaps with libs.play.services.maps
     implementation(libs.play.services.auth)
     implementation(libs.play.services.auth.api.phone)
+    implementation(libs.playServicesLocation)
 
     // Third-party Libraries
-    implementation(libs.ccp)
-    implementation(libs.androidx.gridlayout)
+    implementation(libs.ccp) // Country Code Picker library
 
     // Testing Libraries
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation(libs.google.maps)
-    implementation(libs.androidx.fragment)
 }

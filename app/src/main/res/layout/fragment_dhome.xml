@@ -39,7 +39,7 @@
         <GridLayout
             android:id="@+id/grid_layout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:rowCount="3"
             android:columnCount="2"
             android:layout_below="@id/title"
@@ -239,5 +239,7 @@
 
         </GridLayout>
     </RelativeLayout>
+
+
 
 </ScrollView>

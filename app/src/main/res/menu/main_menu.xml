@@ -13,10 +13,7 @@
         android:title="Registration"
         android:icon="@drawable/reg"/>
         <item android:id="@+id/trackdriver"
-        android:title="Track Driver"
-        android:icon="@drawable/car"/>
-        <item android:id="@+id/otp"
-        android:title="Ongoing Trip"
+        android:title="Available Drivers"
         android:icon="@drawable/car"/>
     <item android:id="@+id/logout"
         android:title="Logout"

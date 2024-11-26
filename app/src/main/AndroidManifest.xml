@@ -1,6 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- Required permissions for Maps and Internet usage -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -16,19 +16,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
-
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisteredParentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DriverRegistrationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChildRegistrationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ParentOtpActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBi2Vp_rNI5W04wa9OqtP6aVwj28l2q7Io" />
-
-        <!-- Activity Declarations -->
+            android:value="AIzaSyBi2Vp_rNI5W04wa9OqtP6aVwj28l2q7Io" /> <!-- Activity Declarations -->
         <activity
             android:name=".DriverHomeActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />
         <activity
             android:name=".DriverLoginActivity"
             android:exported="false" />
@@ -61,7 +82,7 @@
             android:exported="true" />
         <activity
             android:name=".ConfirmActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".OtpActivity"
             android:exported="false" />
@@ -88,8 +109,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

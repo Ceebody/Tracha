@@ -1,14 +1,15 @@
 [versions]
 agp = "8.5.2"
+firebaseBom = "33.6.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
-material = "1.12.0"
-activity = "1.9.2"
-constraintlayout = "2.1.4"
-fragment = "1.8.4"
-core = "1.13.1"
+material = "1.11.0"
+activity = "1.9.3"
+constraintlayout = "2.2.0"
+fragment = "1.8.5"
+core = "1.12.0"
 supportAnnotations = "28.0.0"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.1.0"
@@ -19,17 +20,26 @@ legacySupportV4 = "1.0.0"
 firebaseFirestore = "25.1.1"
 firebaseStorage = "21.0.1"
 firebaseAppcheckPlayintegrity = "18.0.0"
-play-services-auth = "19.0.0"
+play-services-auth = "21.2.0"
 play-services-auth-api-phone = "18.1.0"
 googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
-google-maps = "18.1.0"
-androidx-fragment = "1.6.1"
+google-maps = "19.0.0"
+androidx-fragment = "1.8.5"
 gridlayout = "1.0.0"
 firebaseInappmessagingDisplay = "21.0.1"
 mediationTestSuite = "3.0.0"
+googleMapsVersion= "18.0.2"
+fragmentKtxVersion= "1.6.1"
+playServicesLocationVersion= "21.0.1"
+
+
 
 
 [libraries]
+core-ktx = { group = "androidx.core", name = "core-ktx", version = "1.14.0" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+playServicesLocation = { group = "com.google.android.gms", name = "play-services-location", version = "21.3.0" }
+fragmentKtx = { group = "androidx.fragment", name = "fragment-ktx", version = "1.8.5" }
 google-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "google-maps" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "androidx-fragment" }
 ccp = { module = "com.hbb20:ccp", version = "2.7.0" }

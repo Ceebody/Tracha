@@ -25,12 +25,38 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
 
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:id="@+id/radio_group"
+            android:layout_below="@+id/textView_register_head"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="parent"
+                android:layout_margin="10dp"
+                android:id="@+id/parent_radio"
+                android:textSize="18dp"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="driver"
+                android:layout_margin="10dp"
+                android:id="@+id/radio_driver"
+                android:textSize="18dp"/>
+
+        </RadioGroup>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView_register_full_name"
             android:text="Full Name*"
-            android:layout_below="@+id/textView_register_head"
+            android:layout_below="@+id/radio_group"
             android:textColor="#555555"
             android:textSize="24sp"
             android:padding="6dp"

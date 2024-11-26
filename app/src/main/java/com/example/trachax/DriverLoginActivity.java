@@ -16,7 +16,7 @@ public class DriverLoginActivity extends AppCompatActivity {
     private EditText carDriver, emailDriver, passwordDriver;
     private Button loginButton;
     private ProgressBar progressBar;
-    private TextView signUpText;
+    private TextView signUpText, forgotPasswordText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,7 @@ public class DriverLoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.driver_login_btn);
         progressBar = findViewById(R.id.progress_bar_driver);
         signUpText = findViewById(R.id.signup_driver);
+        forgotPasswordText = findViewById(R.id.forgot_password_driver);
 
         // Set login button click listener
         loginButton.setOnClickListener(new View.OnClickListener() {

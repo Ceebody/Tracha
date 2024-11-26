@@ -16,7 +16,7 @@ public class ParentLoginActivity extends AppCompatActivity {
     private EditText emailParent, passwordParent;
     private Button loginButton;
     private ProgressBar progressBar;
-    private TextView signUpText;
+    private TextView signUpText, forgotPasswordText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class ParentLoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.parent_login_btn);
         progressBar = findViewById(R.id.progress_bar_parent);
         signUpText = findViewById(R.id.signup_parent);
+        forgotPasswordText = findViewById(R.id.forgot_password);
 
         // Set login button click listener
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -87,5 +88,14 @@ public class ParentLoginActivity extends AppCompatActivity {
                 }
             }
         }, 2000); // Simulate network delay
+
+        forgotPasswordText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ParentLoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
+
+            }
+        });
     }
 }

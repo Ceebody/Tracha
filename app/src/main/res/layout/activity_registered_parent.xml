@@ -6,7 +6,7 @@
     android:padding="16dp">
 
     <ListView
-        android:id="@+id/driversListView"
+        android:id="@+id/parentsListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:dividerHeight="1dp"

@@ -88,17 +88,17 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="vertical"
-        android:layout_weight="70"
+        android:layout_weight="30"
         android:gravity="center_vertical">
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="24dp"
+            android:layout_height="50dp"
+            android:textSize="18dp"
             android:id="@+id/driver_login_btn"
             android:layout_margin="10dp"
             android:text="Login"
-            android:background="@drawable/border_2"/>
+            android:backgroundTint="#EE8C8585"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -121,6 +121,8 @@
                 android:layout_marginStart="10dp"
                 android:clickable="true"/>
 
+
+
         </LinearLayout>
 
         <ProgressBar
@@ -133,6 +135,15 @@
 
 
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Forgot Password"
+        android:id="@+id/forgot_password_driver"
+        android:gravity="end"
+        android:textColor="@color/purple_200"
+        android:textSize="20sp" />
+
 
 
 </LinearLayout>

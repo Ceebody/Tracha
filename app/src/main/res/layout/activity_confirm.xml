@@ -13,7 +13,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirm Action"
+        android:text="Confirm Activity"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginBottom="24dp"
@@ -24,7 +24,7 @@
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirm Pickup"
+        android:text="Pickup"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/purple_500"
         android:textColor="@android:color/white"
@@ -35,8 +35,15 @@
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirm Drop-Off"
+        android:text="Drop-Off"
         android:backgroundTint="@color/purple_500"
         android:textColor="@android:color/white"
         android:padding="12dp" />
+
+    <!-- Map fragment for location -->
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="400dp" />
 </LinearLayout>
