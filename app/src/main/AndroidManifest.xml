@@ -2,9 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <!-- Required permissions for Maps and Internet usage -->
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
 
     <application
         android:name=".MyApplication"
@@ -80,12 +87,21 @@
         <activity
             android:name=".ParentDashboard"
             android:exported="true" />
-        <activity
-            android:name=".ConfirmActivity"
-            android:exported="true" />
+        <activity android:name=".ConfirmActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="myapp"
+                    android:host="confirm" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".OtpActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".PhoneActivity"
             android:exported="false" />

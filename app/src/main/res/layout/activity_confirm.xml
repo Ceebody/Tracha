@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,21 +8,34 @@
     tools:context=".ConfirmActivity"
     android:gravity="center">
 
-    <!-- Title or Instructions -->
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Confirm Activity"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="24dp"
-        android:gravity="center" />
 
-    <!-- Button 1: Confirm Pickup -->
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button1"
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/contact"
+        android:text="Contact parent"
+        android:drawableLeft="@drawable/phone_24"
+        android:backgroundTint="@color/purple_200"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:weightSum="70">
+    <!-- Button 1: Confirm Pickup -->
+        <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button1"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Pickup"
         android:layout_marginBottom="16dp"
@@ -31,19 +44,18 @@
         android:padding="12dp" />
 
     <!-- Button 2: Confirm Drop-Off -->
-    <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button2"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Drop-Off"
+        android:layout_marginStart="40dp"
         android:backgroundTint="@color/purple_500"
         android:textColor="@android:color/white"
         android:padding="12dp" />
 
+    </LinearLayout>
+
     <!-- Map fragment for location -->
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="400dp" />
-</LinearLayout>
+
+</RelativeLayout>

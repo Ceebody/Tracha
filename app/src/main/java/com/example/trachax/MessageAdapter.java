@@ -4,48 +4,41 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.trachax.R;
 
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
-    private List<String> messageList;
 
-    public MessageAdapter(List<String> messageList) {
-        this.messageList = messageList;
+    private List<String> messages;
+
+    public MessageAdapter(List<String> messages) {
+        this.messages = messages;
     }
 
-    @NonNull
     @Override
-    public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate the layout for each message item
+    public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_message_item, parent, false);
         return new MessageViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
-        String message = messageList.get(position);
-        holder.messageText.setText(message);  // Set the message to the TextView
+    public void onBindViewHolder(MessageViewHolder holder, int position) {
+        String message = messages.get(position);
+        holder.messageTextView.setText(message);
     }
 
     @Override
     public int getItemCount() {
-        return messageList.size();  // Return the size of the message list
+        return messages.size();
     }
 
-    // ViewHolder class to hold references to the views in each item
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
-        TextView messageText;
+        TextView messageTextView;
 
         public MessageViewHolder(View itemView) {
             super(itemView);
-            // Initialize the TextView for displaying the message
-            messageText = itemView.findViewById(R.id.messageText);
+            messageTextView = itemView.findViewById(R.id.messageTextView);
         }
     }
 }

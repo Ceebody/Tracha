@@ -10,7 +10,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.trachax.R;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactActivity extends AppCompatActivity {
 
@@ -18,6 +19,8 @@ public class ContactActivity extends AppCompatActivity {
     private RecyclerView messageRecyclerView;
     private EditText messageInput;
     private Button sendButton;
+    private MessageAdapter messageAdapter;
+    private List<String> messages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,25 +34,29 @@ public class ContactActivity extends AppCompatActivity {
         sendButton = findViewById(R.id.sendButton);
 
         // Set up the Toolbar
-        setSupportActionBar(toolbar);
-        // Set the title of the toolbar to the other party's name (e.g., "Parent" or "Driver")
-        getSupportActionBar().setTitle("Parent Name"); // Change this dynamically if needed
+        getSupportActionBar().setTitle("Parent Name"); // Change dynamically if needed
 
-        // Set up the RecyclerView to display messages
+        // Initialize message list and adapter
+        messages = new ArrayList<>();
+        messageAdapter = new MessageAdapter(messages);
         messageRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        // You would typically set an adapter here to display messages in the RecyclerView
-        // For now, it's a placeholder, so you should implement an adapter to manage the message list
-        // messageRecyclerView.setAdapter(new MessageAdapter(messages));
+        messageRecyclerView.setAdapter(messageAdapter);
 
-        // Handle the send button click
+        // Handle send button click
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String message = messageInput.getText().toString().trim();
                 if (!message.isEmpty()) {
-                    // Add the message to your message list and update the RecyclerView
-                    // For demonstration, just show a toast
+                    // Add the message to the list and update RecyclerView
+                    messages.add(message);
+                    messageAdapter.notifyItemInserted(messages.size() - 1);
+
+                    // Show a toast (optional)
                     Toast.makeText(ContactActivity.this, "Message Sent: " + message, Toast.LENGTH_SHORT).show();
+
+                    // Scroll to the bottom of the RecyclerView to show the latest message
+                    messageRecyclerView.scrollToPosition(messages.size() - 1);
 
                     // Clear the input field after sending
                     messageInput.setText("");
@@ -59,10 +66,5 @@ public class ContactActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    // Optional: Create a method to update the toolbar's title dynamically if needed
-    private void updateToolbarTitle(String newTitle) {
-        getSupportActionBar().setTitle(newTitle);
     }
 }

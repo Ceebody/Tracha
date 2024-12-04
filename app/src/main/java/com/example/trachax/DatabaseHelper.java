@@ -2,12 +2,9 @@ package com.example.trachax;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // Insert user into the database
     public boolean insertUser(String fullName, String idNumber, String contactNumber, String email, String password, String role) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -61,6 +59,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
+    // Retrieve users based on role
+    public List<String> getUsersByRole(String role) {
+        List<String> users = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COL_2 + " FROM " + TABLE_USERS + " WHERE " + COL_7 + "=?";
+        Cursor cursor = db.rawQuery(query, new String[]{role});
+        if (cursor.moveToFirst()) {
+            do {
+                users.add(cursor.getString(0)); // Add the full name of the user
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return users;
+    }
+
+    // Retrieve users by role as a Cursor object
     public Cursor getUsersByRoleCursor(String role) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(
@@ -69,20 +83,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
     }
 
-    public List<String> getUsersByRole(String role) {
-        List<String> users = new ArrayList<>();
+    // Check if username exists (you can enhance this method for checking other parameters)
+    public boolean checkUsername(String usernameText) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT " + COL_2 + " FROM " + TABLE_USERS + " WHERE " + COL_7 + "=?";
-        Cursor cursor = db.rawQuery(query, new String[]{role});
-        if (cursor.moveToFirst()) {
-            do {
-                users.add(cursor.getString(0));
-            } while (cursor.moveToNext());
+        String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COL_5 + "=?";
+        Cursor cursor = db.rawQuery(query, new String[]{usernameText});
+        if (cursor.getCount() > 0) {
+            cursor.close();
+            return true; // Username exists
         }
         cursor.close();
-        return users;
-    }
-
-    public Boolean checkUsername(String usernameText) {
+        return false; // Username doesn't exist
     }
 }
