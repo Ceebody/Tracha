@@ -239,6 +239,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/register_button"
+            android:id="@+id/Text11"
             android:gravity="center">
 
             <TextView
@@ -259,6 +260,28 @@
                 android:text=" Login"
                 android:textColor="@color/purple_200"
                 android:textSize="24dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/Text11"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="By clicking Register, you agree to our"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:id="@+id/terms"
+                android:text="Terms and Conditions"
+                android:textSize="20sp"
+                android:clickable="true"
+                android:textColor="@color/purple_200"/>
         </LinearLayout>
 
     </RelativeLayout>

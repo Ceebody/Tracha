@@ -8,18 +8,6 @@
     android:orientation="vertical"
     android:background="@drawable/gradient_background">
 
-    <Button
-        android:id="@+id/button_login"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:layout_weight="50"
-        android:layout_marginTop="20dp"
-        android:text="adm"
-        android:background="#3333"
-        android:layout_gravity="center"
-        android:textColor="#333"
-        android:textSize="2sp" />
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,6 +25,7 @@
             <ImageView
                 android:layout_width="340dp"
                 android:layout_height="220dp"
+                android:id="@+id/logo"
                 android:layout_gravity="center"
                 android:src="@drawable/logo" />
 
@@ -62,6 +51,19 @@
                 android:backgroundTint="#E9756E6D"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/button_login"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="#3333"
+                android:text="adm"
+                android:textColor="#333"
+                android:textSize="18sp"
+                android:visibility="gone"/>
+
 
 
         </LinearLayout>

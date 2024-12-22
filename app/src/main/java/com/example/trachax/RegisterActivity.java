@@ -3,6 +3,7 @@ package com.example.trachax;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +12,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText fullName, idNumber, contactNumber, email, password, confirmPassword;
     private ToggleButton passwordToggle;
     private Button registerButton;
-    private TextView loginLink;
+    private TextView loginLink, termsLink;
     private RadioGroup roleRadioGroup;
     private DatabaseHelper dbHelper;
 
@@ -34,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.register_button);
         loginLink = findViewById(R.id.textview_login);
         roleRadioGroup = findViewById(R.id.radio_group);
+        termsLink = findViewById(R.id.terms);
 
         // Password visibility toggle
         passwordToggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -52,6 +54,12 @@ public class RegisterActivity extends AppCompatActivity {
         // Navigate to login
         loginLink.setOnClickListener(v -> {
             Intent intent = new Intent(RegisterActivity.this, LoginRoles.class);
+            startActivity(intent);
+        });
+
+        // Set click listener on the Terms and Conditions TextView
+        termsLink.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, TermsNConditionsActivity.class);
             startActivity(intent);
         });
     }

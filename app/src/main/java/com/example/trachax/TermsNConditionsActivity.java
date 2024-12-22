@@ -1,8 +1,6 @@
 package com.example.trachax;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -41,9 +39,7 @@ public class TermsNConditionsActivity extends AppCompatActivity {
 
         // Handle continue button click
         continueButton.setOnClickListener(view -> {
-            // Proceed to the next activity
-            Intent intent = new Intent(TermsNConditionsActivity.this, MainActivity.class); // Replace MainActivity with your target activity
-            startActivity(intent);
+            // Close the current activity and return to the previous one
             finish();
         });
     }

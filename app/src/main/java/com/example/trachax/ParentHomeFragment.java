@@ -34,7 +34,7 @@ public class ParentHomeFragment extends Fragment {
         CardView terms = view.findViewById(R.id.terms);
 
         // Set Click Listeners for each CardView
-        Otp.setOnClickListener(v -> startActivity(new Intent(requireContext(), ParentOtpActivity.class)));
+        Otp.setOnClickListener(v -> startActivity(new Intent(requireContext(), OtpActivity.class)));
         Bus.setOnClickListener(v -> startActivity(new Intent(requireContext(), BusActivity.class)));
         history.setOnClickListener(v -> startActivity(new Intent(requireContext(), HistoryActivity.class)));
         terms.setOnClickListener(v -> startActivity(new Intent(requireContext(), TermsNConditionsActivity.class)));
