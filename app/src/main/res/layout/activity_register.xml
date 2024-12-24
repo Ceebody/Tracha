@@ -24,8 +24,6 @@
             android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-
-
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -272,14 +270,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:text="By clicking Register, you agree to our"
-                android:textSize="20sp"/>
+                android:textSize="18sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:id="@+id/terms"
                 android:text="Terms and Conditions"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:clickable="true"
                 android:textColor="@color/purple_200"/>
         </LinearLayout>

@@ -17,12 +17,12 @@
         android:layout_height="match_parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/contact"
-        android:text="Contact parent"
-        android:drawableLeft="@drawable/phone_24"
-        android:backgroundTint="@color/purple_200"/>
+        android:hint="c"
+        android:textSize="1sp"
+        android:drawableLeft="@drawable/phone_24" />
 
 
     <LinearLayout

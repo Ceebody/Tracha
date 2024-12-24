@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -53,16 +52,11 @@ public class OtpActivity extends AppCompatActivity {
     private void sendSmsWithDeepLink() {
         String phoneNumber = countryCodePicker.getFullNumberWithPlus();
 
-        // Create the deep link and Play Store fallback URL
-        String appPackageName = "com.example.trachax";
+        // Create the deep link
         String deepLinkUrl = "https://example.com/confirm";
-        String playStoreUrl = "https://play.google.com/store/apps/details?id=" + appPackageName;
 
         // Compose the message
-        String message = "You have been hired as a driver. Please confirm the pickup and drop-off here: "
-                + deepLinkUrl
-                + "\nIf you don't have the app, download it here: "
-                + playStoreUrl;
+        String message = "You have been hired as a driver. Please confirm the pickup and drop-off here: " + deepLinkUrl;
 
         try {
             SmsManager smsManager = SmsManager.getDefault();

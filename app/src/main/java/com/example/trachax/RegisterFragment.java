@@ -25,9 +25,13 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
+        // Initialize DatabaseHelper with context
         dbHelper = new DatabaseHelper(getContext());
+
+        // Get the ListView for displaying drivers
         driversListView = view.findViewById(R.id.driversListView);
 
+        // Load drivers from the database
         loadDrivers();
 
         return view;
@@ -35,7 +39,7 @@ public class RegisterFragment extends Fragment {
 
     private void loadDrivers() {
         ArrayList<String> drivers = new ArrayList<>();
-        Cursor cursor = dbHelper.getUsersByRoleCursor("driver");
+        Cursor cursor = dbHelper.getUsersByRole("Driver"); // Using the existing method getUsersByRole
 
         if (cursor != null) {
             try {
@@ -46,12 +50,13 @@ public class RegisterFragment extends Fragment {
             } catch (Exception e) {
                 Toast.makeText(getContext(), "Error loading drivers: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             } finally {
-                cursor.close();
+                cursor.close();  // Always close the cursor
             }
         } else {
             Toast.makeText(getContext(), "No drivers found.", Toast.LENGTH_SHORT).show();
         }
 
+        // Set the ArrayAdapter to the ListView
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, drivers);
         driversListView.setAdapter(adapter);
     }

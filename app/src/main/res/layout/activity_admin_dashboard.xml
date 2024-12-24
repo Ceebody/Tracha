@@ -1,25 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".AdminDashboardActivity"
-    android:padding="16dp">
+    android:gravity="center"
+    android:background="@drawable/logo">
 
-    <TextView
-        android:id="@+id/parent_overview"
+    <!-- Profile Section -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Parents Overview"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:paddingBottom="16dp" />
+        android:padding="15dp"
+        android:layout_margin="15dp"
+        android:background="@color/teal_700">
 
-    <TextView
-        android:id="@+id/driver_overview"
-        android:layout_width="match_parent"
+        <!-- Fullname TextView -->
+        <TextView
+            android:id="@+id/show_fullname"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:gravity="center_vertical"
+            android:text="Loading"
+            android:textSize="24sp"/>
+
+        <!-- Profile Image -->
+        <ImageView
+            android:id="@+id/profile2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignEnd="@+id/show_fullname"
+            android:layout_marginEnd="-150dp"
+            android:background="@drawable/circ"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <!-- Centered GridLayout -->
+    <GridLayout
+        android:id="@+id/grid_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Drivers Overview"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:rowCount="3"
+        android:columnCount="2"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center">
+
+        <!-- Home Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_home"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="12dp"
+            android:layout_margin="12dp"
+            android:clickable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/parent"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Registered Parents"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Verify OTP Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/verify_otp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="12dp"
+            android:layout_margin="12dp"
+            android:clickable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/driver"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Registered Drivers"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Maps Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_map"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="12dp"
+            android:layout_margin="12dp"
+            android:clickable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/maps"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ongoing Activity"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Delete User Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/confirm_activity"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="12dp"
+            android:layout_margin="12dp"
+            android:clickable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/delete"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delete User"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Terms Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_terms"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="12dp"
+            android:layout_margin="12dp"
+            android:clickable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/terms"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Terms N Conditions"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
 </LinearLayout>

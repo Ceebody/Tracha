@@ -1,7 +1,5 @@
 package com.example.trachax;
 
-import android.annotation.SuppressLint;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -10,13 +8,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DriverRegistrationActivity extends AppCompatActivity {
 
     private ListView driversListView;
     private DatabaseHelper dbHelper;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +22,8 @@ public class DriverRegistrationActivity extends AppCompatActivity {
 
         // Initialize UI components
         driversListView = findViewById(R.id.driversListView);
+
+        // Pass context to the DatabaseHelper constructor
         dbHelper = new DatabaseHelper(this);
 
         // Load drivers from the database and display them
@@ -31,31 +31,22 @@ public class DriverRegistrationActivity extends AppCompatActivity {
     }
 
     private void loadDrivers() {
-        // Query the database for users with the role "driver"
-        Cursor cursor = (Cursor) dbHelper.getUsersByRole("driver");
-        ArrayList<String> drivers = new ArrayList<>();
+        // Get the list of users with the role "driver"
+        List<User> drivers = dbHelper.getUsersByRoleAsList("driver");
 
-        // Check if cursor is not null and contains data
-        if (cursor != null && cursor.moveToFirst()) {
-            try {
-                do {
-                    // Retrieve the driver's name
-                    String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
-                    drivers.add(name);
-                } while (cursor.moveToNext());
-            } catch (Exception e) {
-                Toast.makeText(this, "Error loading drivers: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            } finally {
-                // Close the cursor to avoid memory leaks
-                cursor.close();
+        // Check if the list is not empty
+        if (!drivers.isEmpty()) {
+            ArrayList<String> driverNames = new ArrayList<>();
+            for (User driver : drivers) {
+                driverNames.add(driver.getFullName()); // Assuming User class has a getFullName() method
             }
+
+            // Set the driver list to the ListView
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, driverNames);
+            driversListView.setAdapter(adapter);
         } else {
             // Handle the case where no drivers are found
             Toast.makeText(this, "No drivers found.", Toast.LENGTH_SHORT).show();
         }
-
-        // Set the driver list to the ListView
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, drivers);
-        driversListView.setAdapter(adapter);
     }
 }

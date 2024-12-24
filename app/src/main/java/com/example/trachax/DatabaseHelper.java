@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL_5 = "email";
     private static final String COL_6 = "password";
     private static final String COL_7 = "role";
+    private static final String COL_8 = "photo";
+    private static final String COL_9 = "address";
 
+    // Constructor
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -35,7 +39,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_4 + " TEXT, " +
                 COL_5 + " TEXT UNIQUE, " +
                 COL_6 + " TEXT, " +
-                COL_7 + " TEXT)";
+                COL_7 + " TEXT, " +
+                COL_8 + " TEXT, " +
+                COL_9 + " TEXT)";
         db.execSQL(createTable);
     }
 
@@ -45,7 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Insert user into the database
+    // Insert a new user
     public boolean insertUser(String fullName, String idNumber, String contactNumber, String email, String password, String role) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -55,44 +61,74 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_5, email);
         contentValues.put(COL_6, password);
         contentValues.put(COL_7, role);
+        contentValues.put(COL_8, ""); // Default value for photo
+        contentValues.put(COL_9, ""); // Default value for address
         long result = db.insert(TABLE_USERS, null, contentValues);
         return result != -1;
     }
 
-    // Retrieve users based on role
-    public List<String> getUsersByRole(String role) {
-        List<String> users = new ArrayList<>();
+    // Retrieve a user by full name
+    public User getUserByFullName(String fullName) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT " + COL_2 + " FROM " + TABLE_USERS + " WHERE " + COL_7 + "=?";
-        Cursor cursor = db.rawQuery(query, new String[]{role});
-        if (cursor.moveToFirst()) {
-            do {
-                users.add(cursor.getString(0)); // Add the full name of the user
-            } while (cursor.moveToNext());
+        String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COL_2 + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{fullName});
+
+        User user = null;
+        if (cursor != null && cursor.moveToFirst()) {
+            String contactNumber = cursor.getString(cursor.getColumnIndexOrThrow(COL_4));
+            String idNumber = cursor.getString(cursor.getColumnIndexOrThrow(COL_3));
+            String role = cursor.getString(cursor.getColumnIndexOrThrow(COL_7));
+            // Assuming the user's other details are not needed (like email, photo, address), if you need those, extract them too.
+            user = new User(fullName, contactNumber, role, idNumber);
+            cursor.close();
         }
-        cursor.close();
+        return user; // Return the user object or null if not found
+    }
+
+    // Helper method to retrieve users as a list based on role
+    public List<User> getUsersByRoleAsList(String role) {
+        List<User> users = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_USERS + " WHERE role = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{role});
+
+        if (cursor != null) {
+            try {
+                while (cursor.moveToNext()) {
+                    String fullName = cursor.getString(cursor.getColumnIndexOrThrow(COL_2));
+                    String contactNumber = cursor.getString(cursor.getColumnIndexOrThrow(COL_4));
+                    String idNumber = cursor.getString(cursor.getColumnIndexOrThrow(COL_3));
+                    users.add(new User(fullName, contactNumber, role, idNumber));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                cursor.close();
+            }
+        }
         return users;
     }
 
-    // Retrieve users by role as a Cursor object
-    public Cursor getUsersByRoleCursor(String role) {
+    // Method to check if a username (email) already exists in the database
+    public boolean checkUsername(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery(
-                "SELECT " + COL_2 + " FROM " + TABLE_USERS + " WHERE " + COL_7 + "=?",
-                new String[]{role}
-        );
-    }
+        String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COL_5 + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{username});
 
-    // Check if username exists (you can enhance this method for checking other parameters)
-    public boolean checkUsername(String usernameText) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COL_5 + "=?";
-        Cursor cursor = db.rawQuery(query, new String[]{usernameText});
-        if (cursor.getCount() > 0) {
+        if (cursor != null && cursor.getCount() > 0) {
             cursor.close();
             return true; // Username exists
+        } else {
+            cursor.close();
+            return false; // Username does not exist
         }
-        cursor.close();
-        return false; // Username doesn't exist
     }
+    // Method to retrieve a cursor for users by role
+    public Cursor getUsersByRole(String role) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_USERS + " WHERE role = ?";
+        return db.rawQuery(query, new String[]{role});
+    }
+
+    // Other methods (updateUser, deleteUser, etc.) as required
 }

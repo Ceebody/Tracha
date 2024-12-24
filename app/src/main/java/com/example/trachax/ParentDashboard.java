@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -91,6 +92,28 @@ public class ParentDashboard extends AppCompatActivity {
 
         // Set default fragment
         replaceFragment(new ParentHomeFragment());
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(navigationView)) {
+            // Close the drawer if it's open
+            drawerLayout.closeDrawers();
+        } else {
+            // Show confirmation dialog to exit
+            new AlertDialog.Builder(this)
+                    .setTitle("Exit App")
+                    .setMessage("Are you sure you want to exit?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // Exit the app
+                        super.onBackPressed();
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // Dismiss the dialog
+                        dialog.dismiss();
+                    })
+                    .show();
+        }
     }
 
     private void replaceFragment(Fragment fragment) {

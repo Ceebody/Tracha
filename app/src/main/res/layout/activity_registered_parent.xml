@@ -6,9 +6,8 @@
     android:padding="16dp">
 
     <ListView
-        android:id="@+id/parentsListView"
+        android:id="@+id/listViewParents"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:dividerHeight="1dp"
-        android:divider="@android:color/darker_gray" />
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <!-- Required permissions for Maps and Internet usage -->
+    <!-- Required permissions -->
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:name=".MyApplication"
@@ -25,6 +25,19 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".UserActivity"
+            android:exported="false" />
+        <!-- Ensure MainActivity is the launcher activity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- Other activity declarations -->
         <activity
             android:name=".ResetPasswordActivity"
             android:exported="false" />
@@ -48,11 +61,10 @@
             android:exported="false" />
         <activity
             android:name=".ParentOtpActivity"
-            android:exported="false" />
-
+            android:exported="false" /> <!-- Google Maps API Key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBi2Vp_rNI5W04wa9OqtP6aVwj28l2q7Io" /> <!-- Activity Declarations -->
+            android:value="AIzaSyBi2Vp_rNI5W04wa9OqtP6aVwj28l2q7Io" /> <!-- Other activity declarations -->
         <activity
             android:name=".DriverHomeActivity"
             android:exported="false"
@@ -83,35 +95,37 @@
             android:exported="false" />
         <activity
             android:name=".AdminDashboardActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ParentDashboard"
-            android:exported="true" />
-        <activity android:name=".ConfirmActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConfirmActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
-                    android:scheme="https"
                     android:host="example.com"
-                    android:path="/confirm" />
+                    android:path="/confirm"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".OtpActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".PhoneActivity"
             android:exported="false" />
         <activity
             android:name=".UserProfileActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".DriverRegistrationFragment"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
@@ -121,15 +135,6 @@
         <activity
             android:name=".ParentLoginActivity"
             android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
