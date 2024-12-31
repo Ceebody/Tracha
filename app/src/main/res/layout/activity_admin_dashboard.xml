@@ -47,7 +47,7 @@
 
         <!-- Home Card -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_home"
+            android:id="@+id/card_parent"
             android:layout_width="150dp"
             android:layout_height="150dp"
             app:cardCornerRadius="15dp"
@@ -78,7 +78,7 @@
 
         <!-- Verify OTP Card -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/verify_otp"
+            android:id="@+id/driver"
             android:layout_width="150dp"
             android:layout_height="150dp"
             app:cardCornerRadius="15dp"
@@ -109,7 +109,7 @@
 
         <!-- Maps Card -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_map"
+            android:id="@+id/activity"
             android:layout_width="150dp"
             android:layout_height="150dp"
             app:cardCornerRadius="15dp"
@@ -140,7 +140,7 @@
 
         <!-- Delete User Card -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/confirm_activity"
+            android:id="@+id/delete"
             android:layout_width="150dp"
             android:layout_height="150dp"
             app:cardCornerRadius="15dp"
@@ -171,7 +171,7 @@
 
         <!-- Terms Card -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_terms"
+            android:id="@+id/bus"
             android:layout_width="150dp"
             android:layout_height="150dp"
             app:cardCornerRadius="15dp"
@@ -188,13 +188,13 @@
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/terms"
+                    android:src="@drawable/bus"
                     android:layout_gravity="center_horizontal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Terms N Conditions"
+                    android:text="Bus"
                     android:layout_gravity="center_horizontal"
                     android:textSize="16sp" />
             </LinearLayout>

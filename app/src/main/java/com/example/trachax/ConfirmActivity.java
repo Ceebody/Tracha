@@ -5,9 +5,11 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -27,20 +29,34 @@ public class ConfirmActivity extends AppCompatActivity implements OnMapReadyCall
     private Marker parentHouseMarker;
     private static final String CHANNEL_ID = "ParentNotificationChannel";
 
+    private TextView childNameTextView;
+    private DatabaseHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
 
-        // Buttons
+        // Initialize Database Helper
+        dbHelper = new DatabaseHelper(this);
+
+        // Bind Views
+        childNameTextView = findViewById(R.id.child_name_display);
         AppCompatButton pickupButton = findViewById(R.id.button1);
         AppCompatButton dropOffButton = findViewById(R.id.button2);
         AppCompatButton contactButton = findViewById(R.id.contact);
 
+        // Retrieve Data
+        String phoneNumber = getIntent().getStringExtra("phone_number");
+        if (phoneNumber != null) {
+            retrieveChildData(phoneNumber);
+        }
+
+        // Contact Button Action
         contactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ConfirmActivity.this,ContactActivity.class);
+                Intent intent = new Intent(ConfirmActivity.this, ContactActivity.class);
                 startActivity(intent);
             }
         });
@@ -60,7 +76,6 @@ public class ConfirmActivity extends AppCompatActivity implements OnMapReadyCall
 
         dropOffButton.setOnClickListener(v -> showRatingPopup());
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -138,6 +153,23 @@ public class ConfirmActivity extends AppCompatActivity implements OnMapReadyCall
                 notificationManager.createNotificationChannel(channel);
             }
         }
+    }
 
+    /**
+     * Retrieves child data from the database and displays it.
+     */
+    private void retrieveChildData(String phoneNumber) {
+        Cursor cursor = dbHelper.getDriverDetailsByPhone(phoneNumber);
+        if (cursor != null && cursor.moveToFirst()) {
+            String childName = cursor.getString(cursor.getColumnIndexOrThrow("child_name"));
+            childNameTextView.setText("Child: " + childName);
+        } else {
+            Toast.makeText(this, "No data found for this phone number.", Toast.LENGTH_SHORT).show();
+            finish(); // Close activity if no data
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
     }
 }

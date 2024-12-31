@@ -1,5 +1,6 @@
 package com.example.trachax;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,54 +24,58 @@ public class AdminDashboardActivity extends AppCompatActivity {
         // Initialize views
         showFullname = findViewById(R.id.show_fullname);
         profile2 = findViewById(R.id.profile2);
-        cardHome = findViewById(R.id.card_home);
-        cardVerifyOtp = findViewById(R.id.verify_otp);
-        cardMap = findViewById(R.id.card_map);
-        cardDeleteUser = findViewById(R.id.confirm_activity);
-        cardTerms = findViewById(R.id.card_terms);
+        cardHome = findViewById(R.id.card_parent);
+        cardVerifyOtp = findViewById(R.id.driver);
+        cardMap = findViewById(R.id.activity);
+        cardDeleteUser = findViewById(R.id.delete);
+        cardTerms = findViewById(R.id.bus);
 
         // Set initial data
         showFullname.setText("Admin Name"); // Set admin name
-        // Set the profile image using Picasso or Glide library if required
 
         // Set click listeners for cards
         cardHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle Home card click
-                Toast.makeText(AdminDashboardActivity.this, "Home clicked", Toast.LENGTH_SHORT).show();
+                // Open RegisteredParentActivity
+                Intent intent = new Intent(AdminDashboardActivity.this, RegisteredParentActivity.class);
+                startActivity(intent);
             }
         });
 
         cardVerifyOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle Verify OTP card click
-                Toast.makeText(AdminDashboardActivity.this, "Verify OTP clicked", Toast.LENGTH_SHORT).show();
+                // Open RegisterFragment (within an activity)
+                Intent intent = new Intent(AdminDashboardActivity.this, RegisterFragmentHostActivity.class); // Ensure the fragment is hosted in an activity
+                startActivity(intent);
             }
         });
 
         cardMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle Maps card click
-                Toast.makeText(AdminDashboardActivity.this, "Maps clicked", Toast.LENGTH_SHORT).show();
+                // Open OngoingActivity
+                Intent intent = new Intent(AdminDashboardActivity.this, BusActivity.class);
+                startActivity(intent);
             }
         });
 
         cardDeleteUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle Delete User card click
-                Toast.makeText(AdminDashboardActivity.this, "Delete User clicked", Toast.LENGTH_SHORT).show();
+                // Open DeleteActivity
+                Intent intent = new Intent(AdminDashboardActivity.this, DeleteActivity.class);
+                startActivity(intent);
             }
         });
 
         cardTerms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle Terms card click
-                Toast.makeText(AdminDashboardActivity.this, "Terms clicked", Toast.LENGTH_SHORT).show();
+                // Open BusActivity
+                Intent intent = new Intent(AdminDashboardActivity.this, BusActivity.class);
+                startActivity(intent);
             }
         });
     }

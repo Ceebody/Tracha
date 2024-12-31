@@ -1,5 +1,8 @@
 package com.example.trachax;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -14,7 +17,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.trachax.databinding.ActivityParentDashboardBinding;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 public class ParentDashboard extends AppCompatActivity {
@@ -22,15 +24,22 @@ public class ParentDashboard extends AppCompatActivity {
     private ActivityParentDashboardBinding binding;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Inflate layout
         binding = ActivityParentDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Initialize drawer layout and navigation view
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
+
+        // Initialize shared preferences
+        sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
         // Set up ActionBar toggle for DrawerLayout
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -42,7 +51,7 @@ public class ParentDashboard extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // Handle Navigation Drawer item clicks
+        // Handle navigation drawer item clicks
         navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.home:
@@ -61,6 +70,10 @@ public class ParentDashboard extends AppCompatActivity {
                     replaceFragment(new ShareFragment());
                     break;
 
+                case R.id.logout:
+                    confirmLogout();
+                    break;
+
                 default:
                     break;
             }
@@ -68,7 +81,7 @@ public class ParentDashboard extends AppCompatActivity {
             return true;
         });
 
-        // Handle Bottom Navigation item clicks
+        // Handle bottom navigation item clicks
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.home:
@@ -76,7 +89,7 @@ public class ParentDashboard extends AppCompatActivity {
                     break;
 
                 case R.id.reg:
-                    replaceFragment(new RegisterFragment());
+                    replaceFragment(new RegistrationFragment());
                     break;
 
                 case R.id.trackdriver:
@@ -84,7 +97,10 @@ public class ParentDashboard extends AppCompatActivity {
                     break;
 
                 case R.id.logout:
-                    Toast.makeText(this, "You are logged out", Toast.LENGTH_SHORT).show();
+                    confirmLogout();
+                    break;
+
+                default:
                     break;
             }
             return true;
@@ -96,6 +112,7 @@ public class ParentDashboard extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (drawerLayout.isDrawerOpen(navigationView)) {
             // Close the drawer if it's open
             drawerLayout.closeDrawers();
@@ -104,14 +121,8 @@ public class ParentDashboard extends AppCompatActivity {
             new AlertDialog.Builder(this)
                     .setTitle("Exit App")
                     .setMessage("Are you sure you want to exit?")
-                    .setPositiveButton("Yes", (dialog, which) -> {
-                        // Exit the app
-                        super.onBackPressed();
-                    })
-                    .setNegativeButton("No", (dialog, which) -> {
-                        // Dismiss the dialog
-                        dialog.dismiss();
-                    })
+                    .setPositiveButton("Yes", (dialog, which) -> finish())
+                    .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
                     .show();
         }
     }
@@ -121,5 +132,28 @@ public class ParentDashboard extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment, fragment);
         fragmentTransaction.commit();
+    }
+
+    private void confirmLogout() {
+        // Show confirmation dialog for logout
+        new AlertDialog.Builder(this)
+                .setTitle("Log Out")
+                .setMessage("Are you sure you want to log out?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    // Clear shared preferences
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear();
+                    editor.apply();
+
+                    // Redirect to LoginRoles activity
+                    Intent intent = new Intent(ParentDashboard.this, LoginRoles.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+
+                    // Show a toast message
+                    Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                .show();
     }
 }

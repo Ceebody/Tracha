@@ -11,16 +11,26 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter Driver's Phone number"
+        android:text="Enter Child's name and Driver's Phone number"
         android:textSize="18sp"
         android:textColor="@android:color/white"
         android:layout_marginBottom="20dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Child's name"
+        android:id="@+id/child_name"
+        android:textSize="24sp"
+        android:background="@drawable/border"
+        android:padding="5dp"
+        android:layout_margin="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:weightSum="10"
+        android:weightSum="5"
         android:id="@+id/contact_layout"
         android:layout_below="@+id/textView_register_contact_number"
         android:gravity="center">

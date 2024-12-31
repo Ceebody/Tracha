@@ -1,61 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".ConfirmActivity"
     android:gravity="center">
 
-
-
+    <!-- Map fragment for location -->
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <!-- TextView to display child's name -->
+    <TextView
+        android:id="@+id/child_name_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/contact"
-        android:hint="c"
-        android:textSize="1sp"
-        android:drawableLeft="@drawable/phone_24" />
+        android:layout_marginTop="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Child Name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black" />
 
+    <!-- Transparent contact button -->
+
+    <!-- Buttons for pickup and drop-off -->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/contact"
+        android:layout_width="69dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="4dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Contact"
+        android:drawableLeft="@drawable/phone_24"
+        android:text="" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
         android:weightSum="70">
-    <!-- Button 1: Confirm Pickup -->
-        <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button1"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Pickup"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/purple_500"
-        android:textColor="@android:color/white"
-        android:padding="12dp" />
 
-    <!-- Button 2: Confirm Drop-Off -->
+        <!-- Button 1: Confirm Pickup -->
         <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button2"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Drop-Off"
-        android:layout_marginStart="40dp"
-        android:backgroundTint="@color/purple_500"
-        android:textColor="@android:color/white"
-        android:padding="12dp" />
+            android:id="@+id/button1"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/purple_500"
+            android:padding="12dp"
+            android:text="Pickup"
+            android:textColor="@android:color/white" />
 
+        <!-- Button 2: Confirm Drop-Off -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button2"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:backgroundTint="@color/purple_500"
+            android:padding="12dp"
+            android:text="Drop-Off"
+            android:textColor="@android:color/white" />
     </LinearLayout>
-
-    <!-- Map fragment for location -->
-
 </RelativeLayout>

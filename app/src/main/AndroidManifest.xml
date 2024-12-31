@@ -26,9 +26,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".UserActivity"
+            android:name=".RegisterFragmentHostActivity"
             android:exported="false" />
-        <!-- Ensure MainActivity is the launcher activity -->
+
+        <activity
+            android:name=".DeleteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserActivity"
+            android:exported="false" /> <!-- Ensure MainActivity is the launcher activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -116,7 +122,7 @@
         </activity>
         <activity
             android:name=".OtpActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".PhoneActivity"
             android:exported="false" />

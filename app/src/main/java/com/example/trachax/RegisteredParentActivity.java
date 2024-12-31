@@ -39,14 +39,16 @@ public class RegisteredParentActivity extends AppCompatActivity {
 
         // Get a cursor with parents data
         Cursor cursor = dbHelper.getUsersByRole("Parent");
-
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                // Assuming 'full_name' is the column where the parent's name is stored
-                String parentName = cursor.getString(cursor.getColumnIndexOrThrow("full_name"));
-                parentNames.add(parentName);
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                String fullName = cursor.getString(cursor.getColumnIndexOrThrow("full_name"));
+                String role = cursor.getString(cursor.getColumnIndexOrThrow("role"));
+
+
+                System.out.println("ID: " + id + ", Name: " + fullName);
             } while (cursor.moveToNext());
-            cursor.close();  // Close the cursor after use
+            cursor.close(); // Don't forget to close the cursor to release resources
         }
 
         return parentNames;
