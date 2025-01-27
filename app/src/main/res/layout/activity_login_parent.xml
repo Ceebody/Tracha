@@ -55,7 +55,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:padding="10dp"
         android:inputType="textEmailAddress"
         android:hint="Email"
@@ -66,7 +66,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:padding="10dp"
         android:inputType="textPassword"
         android:hint="Password"
@@ -79,7 +79,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         android:orientation="vertical"
         android:layout_weight="30"
         android:gravity="center_vertical">
@@ -106,18 +106,29 @@
                 android:textSize="18dp"/>
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:text="Sign up"
                 android:textSize="18dp"
+                android:textColor="@color/navy_blue"
                 android:id="@+id/signup_parent"
                 android:layout_marginStart="10dp"
                 android:clickable="true"/>
 
+
         </LinearLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password"
+            android:id="@+id/forgot_password"
+            android:gravity="center"
+            android:textColor="@color/purple_200"
+            android:textSize="18sp" />
+
         <ProgressBar
-            android:layout_width="32dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:id="@+id/progress_bar_parent"
             android:indeterminateTint="@color/teal_700"
@@ -126,16 +137,6 @@
 
 
     </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Forgot Password"
-        android:gravity="end"
-        android:id="@+id/forgot_password"
-        android:layout_marginTop="3dp"
-        android:textColor="@color/purple_200"
-        android:textSize="20sp" />
 
 
 

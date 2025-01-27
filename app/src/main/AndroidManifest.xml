@@ -26,15 +26,20 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".AdminBusActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ParentBusActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterFragmentHostActivity"
             android:exported="false" />
-
         <activity
             android:name=".DeleteActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".UserActivity"
-            android:exported="false" /> <!-- Ensure MainActivity is the launcher activity -->
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -67,10 +72,12 @@
             android:exported="false" />
         <activity
             android:name=".ParentOtpActivity"
-            android:exported="false" /> <!-- Google Maps API Key -->
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBi2Vp_rNI5W04wa9OqtP6aVwj28l2q7Io" /> <!-- Other activity declarations -->
+            android:value="AIzaSyCY9oturc9bql33PSUkfNUptcHXla2RWN4" />
+
         <activity
             android:name=".DriverHomeActivity"
             android:exported="false"
@@ -78,6 +85,9 @@
         <activity
             android:name=".DriverLoginActivity"
             android:exported="false" />
+        <activity
+            android:name=".BusDriverLoginActivity"
+            android:exported="true" />
         <activity
             android:name=".ShareFragment"
             android:exported="false" />
@@ -88,7 +98,7 @@
             android:name=".TermsNConditionsActivity"
             android:exported="false" />
         <activity
-            android:name=".VerifyOtpActivity"
+            android:name=".GeneratedTokenActivity"
             android:exported="false" />
         <activity
             android:name=".MapsActivity"
@@ -101,28 +111,16 @@
             android:exported="false" />
         <activity
             android:name=".AdminDashboardActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ParentDashboard"
             android:exported="false" />
         <activity
             android:name=".ConfirmActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="example.com"
-                    android:path="/confirm"
-                    android:scheme="https" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".OtpActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".PhoneActivity"
             android:exported="false" />

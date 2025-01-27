@@ -1,11 +1,11 @@
 package com.example.trachax;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -31,7 +31,11 @@ public class AdminDashboardActivity extends AppCompatActivity {
         cardTerms = findViewById(R.id.bus);
 
         // Set initial data
-        showFullname.setText("Admin Name"); // Set admin name
+        SharedPreferences sharedPreferences = getSharedPreferences("AdminPrefs", MODE_PRIVATE);
+        String adminEmail = sharedPreferences.getString("admin_email", "No email found");
+
+        // Set the email to the TextView
+        showFullname.setText(adminEmail);
 
         // Set click listeners for cards
         cardHome.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +51,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Open RegisterFragment (within an activity)
-                Intent intent = new Intent(AdminDashboardActivity.this, RegisterFragmentHostActivity.class); // Ensure the fragment is hosted in an activity
+                Intent intent = new Intent(AdminDashboardActivity.this, DriverRegistrationActivity.class);
                 startActivity(intent);
             }
         });
@@ -56,7 +60,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Open OngoingActivity
-                Intent intent = new Intent(AdminDashboardActivity.this, BusActivity.class);
+                Intent intent = new Intent(AdminDashboardActivity.this, AdminDashboardActivity.class);
                 startActivity(intent);
             }
         });
@@ -74,7 +78,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Open BusActivity
-                Intent intent = new Intent(AdminDashboardActivity.this, BusActivity.class);
+                Intent intent = new Intent(AdminDashboardActivity.this, ParentBusActivity.class);
                 startActivity(intent);
             }
         });

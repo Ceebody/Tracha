@@ -1,7 +1,7 @@
 package com.example.trachax;
 
 import android.Manifest;
-import android.content.ContentValues;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -14,86 +14,104 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.hbb20.CountryCodePicker;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class OtpActivity extends AppCompatActivity {
 
-    private static final int SMS_PERMISSION_REQUEST_CODE = 1;
-
     private EditText childNameEditText, phoneEditText;
-    private Button hireDriverButton;
-    private CountryCodePicker countryCodePicker;
+    private Button sendTokenButton;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference tokensRef;
+    private FirebaseAuth firebaseAuth;
 
-    private DatabaseHelper dbHelper;
+    private static final int SMS_PERMISSION_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
 
-        // Initialize Database Helper
-        dbHelper = new DatabaseHelper(this);
-
-        // Bind views
+        // Initialize UI elements
         childNameEditText = findViewById(R.id.child_name);
         phoneEditText = findViewById(R.id.phone);
-        hireDriverButton = findViewById(R.id.verify_button);
-        countryCodePicker = findViewById(R.id.ccp);
+        sendTokenButton = findViewById(R.id.send_token);
 
-        // Set the country code picker to work with the phone number
-        countryCodePicker.registerCarrierNumberEditText(phoneEditText);
+        // Initialize Firebase
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        tokensRef = firebaseDatabase.getReference("tokens");
 
-        hireDriverButton.setOnClickListener(view -> {
+        // Handle button click
+        sendTokenButton.setOnClickListener(v -> {
+            String childName = childNameEditText.getText().toString().trim();
+            String phoneNumber = phoneEditText.getText().toString().trim();
+
+            if (childName.isEmpty() || phoneNumber.isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Check SMS permission
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
                     != PackageManager.PERMISSION_GRANTED) {
-                // Request SMS permission
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_REQUEST_CODE);
             } else {
-                // Permission already granted, save data and send SMS with deep link
-                saveDataToDatabase();
+                processToken(childName, phoneNumber);
             }
         });
     }
 
-    private void saveDataToDatabase() {
-        String childName = childNameEditText.getText().toString().trim();
-        String phoneNumber = countryCodePicker.getFullNumberWithPlus();
+    private void processToken(String childName, String phoneNumber) {
+        // Generate a random token
+        String token = generateToken();
 
-        if (childName.isEmpty() || phoneNumber.isEmpty()) {
-            Toast.makeText(this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
-            return;
+        // Send the token via SMS
+        sendTokenToDriver(token, phoneNumber);
+
+        // Save the token to Firebase under the parent's UID
+        String parentId = firebaseAuth.getCurrentUser() != null ? firebaseAuth.getCurrentUser().getUid() : null;
+        if (parentId != null) {
+            saveTokenToFirebase(parentId, token, childName, phoneNumber);
+        } else {
+            Toast.makeText(this, "Parent ID not found. Please log in again.", Toast.LENGTH_SHORT).show();
         }
 
-        // Save data to database
-        ContentValues values = new ContentValues();
-        values.put("child_name", childName);
-        values.put("phone_number", phoneNumber);
-        long result = dbHelper.insertDriverData(values);
+        // Transition to ConfirmActivity and pass the token
+        Intent intent = new Intent(this, GeneratedTokenActivity.class);
+        intent.putExtra("generated_token", token);
+        startActivity(intent);
+        finish(); // Close the current activity
+    }
 
-        if (result != -1) {
-            // Data saved, send SMS
-            sendSmsWithDeepLink(phoneNumber);
-        } else {
-            Toast.makeText(this, "Failed to save data. Please try again.", Toast.LENGTH_SHORT).show();
+    private String generateToken() {
+        int randomNumber = (int) (Math.random() * 9000) + 1000; // Generate a 4-digit number
+        return "YBS2919" + randomNumber; // Append it to a prefix
+    }
+
+    private void sendTokenToDriver(String token, String phoneNumber) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            String message = "Your verification token is: " + token + ". Please go to confirm activity to proceed.";
+            smsManager.sendTextMessage(phoneNumber, null, message, null, null);
+            Toast.makeText(this, "Token sent to driver!", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "Failed to send token. Please try again.", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void sendSmsWithDeepLink(String phoneNumber) {
-        // Create the deep link
-        String deepLinkUrl = "https://example.com/confirm";
-
-        // Compose the message
-        String message = "You have been hired as a driver. Please confirm the pickup and drop-off here: " + deepLinkUrl;
-
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNumber, null, message, null, null);
-            Toast.makeText(this, "Message sent successfully!", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            Toast.makeText(this, "Failed to send message. Please try again.", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
+    private void saveTokenToFirebase(String parentId, String token, String childName, String phoneNumber) {
+        Token tokenData = new Token(token, childName, phoneNumber);
+        tokensRef.child(parentId).child("tokens").push().setValue(tokenData)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, "Token saved to Firebase", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Failed to save token", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override
@@ -101,10 +119,29 @@ public class OtpActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == SMS_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                saveDataToDatabase();
+                // Retry processing the token after permission is granted
+                String childName = childNameEditText.getText().toString().trim();
+                String phoneNumber = phoneEditText.getText().toString().trim();
+                processToken(childName, phoneNumber);
             } else {
-                Toast.makeText(this, "SMS permission is required to send messages.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "SMS permission is required to send the token.", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    public static class Token {
+        public String token;
+        public String childName;
+        public String phoneNumber;
+
+        // Default constructor required for calls to DataSnapshot.getValue(Token.class)
+        public Token() {
+        }
+
+        public Token(String token, String childName, String phoneNumber) {
+            this.token = token;
+            this.childName = childName;
+            this.phoneNumber = phoneNumber;
         }
     }
 }

@@ -34,7 +34,7 @@
 
             <RadioButton
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:text="parent"
                 android:layout_margin="10dp"
                 android:id="@+id/parent_radio"
@@ -281,6 +281,15 @@
                 android:clickable="true"
                 android:textColor="@color/purple_200"/>
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/register_button"
+            android:elevation="10dp"
+            android:visibility="gone" />
+
 
     </RelativeLayout>
 </ScrollView>

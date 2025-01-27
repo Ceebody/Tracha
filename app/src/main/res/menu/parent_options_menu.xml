@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/option_profile"
+        android:title="Profile" />
+    <item
+        android:id="@+id/option_children"
+        android:title="Children" />
+    <item
+        android:id="@+id/option_history"
+        android:title="History" />
+    <item
+        android:id="@+id/option_delete"
+        android:title="Delete" />
+</menu>

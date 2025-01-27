@@ -11,12 +11,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class ParentLoginActivity extends AppCompatActivity {
 
     private EditText emailParent, passwordParent;
     private Button loginButton;
     private ProgressBar progressBar;
     private TextView signUpText, forgotPasswordText;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,22 +34,23 @@ public class ParentLoginActivity extends AppCompatActivity {
         signUpText = findViewById(R.id.signup_parent);
         forgotPasswordText = findViewById(R.id.forgot_password);
 
+        // Initialize FirebaseAuth
+        mAuth = FirebaseAuth.getInstance();
+
         // Set login button click listener
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginParent();
-            }
-        });
+        loginButton.setOnClickListener(v -> loginParent());
 
         // Set sign-up text click listener
-        signUpText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to Parent Registration Activity
-                Intent intent = new Intent(ParentLoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
+        signUpText.setOnClickListener(v -> {
+            // Navigate to Parent Registration Activity
+            Intent intent = new Intent(ParentLoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
+
+        // Set forgot password text click listener
+        forgotPasswordText.setOnClickListener(v -> {
+            Intent intent = new Intent(ParentLoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -66,36 +70,23 @@ public class ParentLoginActivity extends AppCompatActivity {
             return;
         }
 
-        // Simulate login process with ProgressBar
+        // Show progress bar while authenticating
         progressBar.setVisibility(View.VISIBLE);
 
-        // For now, simulate a successful login. Replace this with your authentication logic.
-        loginButton.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.GONE);
+        // Firebase Authentication
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    progressBar.setVisibility(View.GONE);
+                    if (task.isSuccessful()) {
+                        Toast.makeText(ParentLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-                // Mock success case
-                if (email.equals("parent@example.com") && password.equals("parent123")) {
-                    Toast.makeText(ParentLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-
-                    // Navigate to ParentDashboardActivity
-                    Intent intent = new Intent(ParentLoginActivity.this, ParentDashboard.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(ParentLoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, 2000); // Simulate network delay
-
-        forgotPasswordText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ParentLoginActivity.this, ForgotPasswordActivity.class);
-                startActivity(intent);
-
-            }
-        });
+                        // Navigate to ParentDashboardActivity
+                        Intent intent = new Intent(ParentLoginActivity.this, ParentDashboard.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(ParentLoginActivity.this, "Login Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

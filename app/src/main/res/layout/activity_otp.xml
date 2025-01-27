@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
     android:gravity="center"
@@ -11,66 +9,37 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter Child's name and Driver's Phone number"
+        android:text="Enter Child's Name and Driver's Phone Number"
         android:textSize="18sp"
         android:textColor="@android:color/white"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp" />
 
     <EditText
+        android:id="@+id/child_name"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:hint="Child's name"
-        android:id="@+id/child_name"
-        android:textSize="24sp"
+        android:hint="Child's Name"
+        android:textSize="18sp"
         android:background="@drawable/border"
-        android:padding="5dp"
-        android:layout_margin="10dp"/>
+        android:padding="10dp"
+        android:layout_marginBottom="10dp" />
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/phone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:weightSum="5"
-        android:id="@+id/contact_layout"
-        android:layout_below="@+id/textView_register_contact_number"
-        android:gravity="center">
-
-
-        <com.hbb20.CountryCodePicker
-            android:id="@+id/ccp"
-            android:layout_width="131dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border"
-            android:elevation="5dp"
-            android:padding="10dp"
-            app:ccp_defaultPhoneCode="233"
-            app:ccp_arrowSize="25dp"
-            app:ccp_showFlag="true"
-            app:ccp_textSize="10dp" />
-
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:padding="10dp"
-            android:inputType="phone"
-            android:hint="Phone number"
-            android:layout_margin="10dp"
-            android:id="@+id/phone"
-            android:elevation="5dp"
-            android:background="@drawable/border"/>
-
-    </LinearLayout>
-
-
+        android:layout_height="60dp"
+        android:hint="Driver's Phone Number"
+        android:inputType="phone"
+        android:textSize="18sp"
+        android:background="@drawable/border"
+        android:padding="10dp"
+        android:layout_marginBottom="20dp" />
 
     <Button
-        android:id="@+id/verify_button"
+        android:id="@+id/send_token"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hire driver"
+        android:text="Generate Token"
         android:backgroundTint="@color/purple_200"
-        android:textColor="@android:color/white"
-        android:padding="10dp"/>
-
+        android:textColor="@android:color/white" />
 </LinearLayout>

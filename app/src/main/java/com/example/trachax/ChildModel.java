@@ -2,36 +2,70 @@ package com.example.trachax;
 
 public class ChildModel {
     private String name;
-    private String age;
+    private int age;
     private String gender;
     private String school;
-    private String childClass;
+    private String grade;
+    private String id;
 
-    public ChildModel(String name, String age, String gender, String school, String childClass) {
+    // Empty constructor required for Firebase
+    public ChildModel() {}
+
+    // Constructor with parameters
+    public ChildModel(String name, int age, String gender, String school, String grade) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.school = school;
-        this.childClass = childClass;
+        this.grade = grade;
     }
 
+    // Getters and setters
     public String getName() {
         return name;
     }
 
-    public String getAge() {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
         return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getGender() {
         return gender;
     }
 
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public String getSchool() {
         return school;
     }
 
-    public String getChildClass() {
-        return childClass;
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

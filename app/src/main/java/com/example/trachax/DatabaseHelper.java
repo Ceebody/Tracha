@@ -8,6 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.nio.charset.StandardCharsets;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -26,11 +31,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL_PHOTO = "photo";
     private static final String COL_ADDRESS = "address";
 
+    // Parent Table
+    private static final String TABLE_PARENTS = "parents";
+    private static final String COL_PARENT_NAME = "parent_name";
+    private static final String COL_PARENT_PHONE = "parent_phone";
+
+
     // Drivers Table
     private static final String TABLE_DRIVERS = "drivers";
-    private static final String COL_PARENT_NAME = "parent_name";
     private static final String COL_CHILD_NAME = "child_name";
     private static final String COL_PHONE_NUMBER = "phone_number";
+    private static final String COL_DRIVER_NAME = "driver_name";
+    private static final String COL_DRIVER_PHONE = "driver_phone";
+    private static final String COL_PARENT_ID = "parent_id";  // Foreign Key
+
 
     // Bus Location Table
     private static final String TABLE_BUS_LOCATION = "bus_location";
@@ -43,6 +57,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL_RECEIVER_ID = "receiver_id";
     private static final String COL_MESSAGE_TEXT = "message_text";
     private static final String COL_TIMESTAMP = "timestamp";
+
+    // Add constants for the Children table
+    private static final String TABLE_CHILDREN = "children";
+    private static final String COL_CHILD_ID = "child_id";
+    private static final String COL_CHILD_AGE = "child_age";
+    private static final String COL_CHILD_CLASS = "child_class";
+    private static final String COL_CHILD_PHOTO = "child_photo";
+    private static final String COL_CHILD_EMERGENCY_CONTACTS = "child_emergency_contacts";
+    private static final String COL_CHILD_GENDER = "gender";
+
 
     // Constructor
     public DatabaseHelper(Context context) {
@@ -64,12 +88,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_ADDRESS + " TEXT)";
         db.execSQL(createUsersTable);
 
-        // Create Drivers Table
-        String createDriversTable = "CREATE TABLE " + TABLE_DRIVERS + " (" +
-                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL_PARENT_NAME + " TEXT, " +
-                COL_CHILD_NAME + " TEXT, " +
-                COL_PHONE_NUMBER + " TEXT UNIQUE)";
+
+        // Create the Parents Table
+        String createParentsTable = "CREATE TABLE " + TABLE_PARENTS + " ("
+                + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COL_PARENT_NAME + " TEXT NOT NULL, "
+                + COL_PARENT_PHONE + " TEXT NOT NULL);";
+        db.execSQL(createParentsTable);
+
+        //create driver table
+        String createDriversTable = "CREATE TABLE " + TABLE_DRIVERS + " ("
+                + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COL_DRIVER_NAME + " TEXT NOT NULL, "
+                + COL_DRIVER_PHONE + " TEXT NOT NULL, "
+                + COL_PARENT_ID + " INTEGER NOT NULL, "
+                + "FOREIGN KEY(" + COL_PARENT_ID + ") REFERENCES " + TABLE_PARENTS + "(" + COL_ID + "));";
+
         db.execSQL(createDriversTable);
 
         // Create Bus Location Table
@@ -87,50 +121,178 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_MESSAGE_TEXT + " TEXT, " +
                 COL_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP)";
         db.execSQL(createMessagesTable);
+
+        // Create Children Table
+        String createChildrenTable = "CREATE TABLE IF NOT EXISTS " + TABLE_CHILDREN + " (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "gender TEXT, " +
+                "child_class INTEGER, " +
+                "school TEXT, " +
+                "age INTEGER, " +
+                "name TEXT, " +
+                "parent_id INTEGER, " +
+                "FOREIGN KEY(parent_id) REFERENCES " + TABLE_USERS + "(id));";
+        db.execSQL(createChildrenTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DRIVERS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BUS_LOCATION);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MESSAGES);
 
-        onCreate(db);
     }
+}
+   /* @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if (oldVersion < 3) {
+            // Alter tables or drop and recreate necessary tables
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_PARENTS);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_DRIVERS);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_BUS_LOCATION);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_MESSAGES);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_CHILDREN);
+
+            onCreate(db);
+        }
+    }
+
+
+    // Insert a new child
+    public boolean insertChild(int parentId, String name, int age, int childClass, String photo, String emergencyContacts, String gender) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_PARENT_ID, parentId);
+        contentValues.put(COL_CHILD_NAME, name);
+        contentValues.put(COL_CHILD_AGE, age);
+        contentValues.put(COL_CHILD_CLASS, childClass);  // Changed to Integer
+        contentValues.put(COL_CHILD_PHOTO, photo);
+        contentValues.put(COL_CHILD_EMERGENCY_CONTACTS, emergencyContacts);
+        contentValues.put(COL_CHILD_GENDER, gender);
+        long result = db.insert(TABLE_CHILDREN, null, contentValues);
+        return result != -1;
+    }
+
 
     // Insert a new user
-    public boolean insertUser(String fullName, String idNumber, String contactNumber, String email, String password, String role) {
+    public long insertUser(String fullName, String idNumber, String contactNumber, String email, String password, String role) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_FULL_NAME, fullName);
-        contentValues.put(COL_ID_NUMBER, idNumber);
-        contentValues.put(COL_CONTACT_NUMBER, contactNumber);
-        contentValues.put(COL_EMAIL, email);
-        contentValues.put(COL_PASSWORD, password);
-        contentValues.put(COL_ROLE, role);
-        contentValues.put(COL_PHOTO, ""); // Default photo
-        contentValues.put(COL_ADDRESS, ""); // Default address
-        long result = db.insert(TABLE_USERS, null, contentValues);
+
+        // Hash the password before storing it
+        String hashedPassword = hashPassword(password);
+
+        contentValues.put("full_name", fullName);
+        contentValues.put("id_number", idNumber);
+        contentValues.put("contact_number", contactNumber);
+        contentValues.put("email", email);
+        contentValues.put("password", hashedPassword); // Store hashed password
+        contentValues.put("role", role);
+
+        // Insert the record and return the row ID
+        return db.insert("users", null, contentValues);
+    }
+
+
+
+    // Hash the password using SHA-256
+    private String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            return bytesToHex(hashBytes); // Convert byte array to hex string
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return password; // In case hashing fails, return original password (not recommended)
+        }
+    }
+
+    // Convert byte array to hexadecimal string
+    private String bytesToHex(byte[] bytes) {
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : bytes) {
+            hexString.append(String.format("%02x", b));
+        }
+        return hexString.toString();
+    }
+
+    //insert parent
+    public boolean insertParent(String parentName, String phoneNumber, String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_PARENT_NAME, parentName);
+        values.put(COL_PHONE_NUMBER, phoneNumber);
+        values.put(COL_EMAIL, email);
+
+        long result = db.insert(TABLE_PARENTS, null, values);
         return result != -1;
     }
 
-    // Insert a new driver
-    public boolean insertDriver(String parentName, String childName, String phoneNumber) {
+
+
+    // Insert Driver
+    public boolean insertDriver(String driverName, String driverPhone, int parentId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_PARENT_NAME, parentName);
-        contentValues.put(COL_CHILD_NAME, childName);
-        contentValues.put(COL_PHONE_NUMBER, phoneNumber);
-        long result = db.insert(TABLE_DRIVERS, null, contentValues);
+        ContentValues values = new ContentValues();
+
+        // Insert values
+        values.put(COL_DRIVER_NAME, driverName);
+        values.put(COL_DRIVER_PHONE, driverPhone);
+        values.put(COL_PARENT_ID, parentId);
+
+        // Attempt to insert the record
+        long result = db.insert(TABLE_DRIVERS, null, values);
+
+        // Return true if successful, false otherwise
         return result != -1;
     }
 
-    // Retrieve driver details by phone number
-    public Cursor getDriverDetailsByPhone(String phoneNumber) {
+
+    // Retrieve All Parents
+    public List<String> getAllParents() {
+        List<String> parents = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT " + COL_PARENT_NAME + ", " + COL_CHILD_NAME + " FROM " + TABLE_DRIVERS + " WHERE " + COL_PHONE_NUMBER + " = ?";
-        return db.rawQuery(query, new String[]{phoneNumber});
+        String query = "SELECT " + COL_PARENT_NAME + " FROM " + TABLE_PARENTS;
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                parents.add(cursor.getString(cursor.getColumnIndexOrThrow(COL_PARENT_NAME)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return parents;
+    }
+
+
+    // Retrieve All Drivers for a Parent
+    public List<String> getDriversByParentId(int parentId) {
+        List<String> drivers = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COL_DRIVER_NAME + " FROM " + TABLE_DRIVERS + " WHERE " + COL_PARENT_ID + " = ?";
+
+        // Correctly pass the parentId as a String array parameter
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(parentId)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                drivers.add(cursor.getString(cursor.getColumnIndexOrThrow(COL_DRIVER_NAME)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return drivers;
+    }
+
+
+    // Retrieve Parent by Email
+    public int getParentIdByEmail(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COL_ID + " FROM " + TABLE_PARENTS + " WHERE " + COL_EMAIL + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{email});
+
+        int parentId = -1;
+        if (cursor.moveToFirst()) {
+            parentId = cursor.getInt(cursor.getColumnIndexOrThrow(COL_ID));
+        }
+        cursor.close();
+        return parentId;
     }
 
     // Insert or update bus location
@@ -150,6 +312,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.close();
             return result != -1;
         }
+
+
     }
 
     // Get bus location
@@ -239,6 +403,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return user;
     }
 
+
     // Update user profile
     public boolean updateUserProfile(int userId, String fullName, String contactNumber, String address, String photo) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -251,8 +416,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result > 0;
     }
 
-        // Other methods...
-
         // Method to delete a user by ID
         public void deleteUser(int id) {
             SQLiteDatabase db = this.getWritableDatabase();
@@ -262,45 +425,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.close();
         }
 
-        // Other methods...
-
-
-
-
-            // Method to get users by role as a list
-            public List<User> getUsersByRoleAsList(String role) {
-                List<User> users = new ArrayList<>();
-
-                // Query to select users by role
-                String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COL_ROLE + " = ?";
-                SQLiteDatabase db = this.getReadableDatabase();
-
-                // Execute the query and get the result
-                Cursor cursor = db.rawQuery(query, new String[]{role});
-
-                // Loop through the result and create User objects
-                // Inside your DatabaseHelper class
-                if (cursor.moveToFirst()) {
-                    do {
-                        int id = cursor.getInt(cursor.getColumnIndex(COL_ID));
-                        String fullName = cursor.getString(cursor.getColumnIndex(COL_FULL_NAME));
-                        String contactNumber = cursor.getString(cursor.getColumnIndex(COL_CONTACT_NUMBER));
-                        String email = cursor.getString(cursor.getColumnIndex(COL_EMAIL));
-                        String userRole = cursor.getString(cursor.getColumnIndex(COL_ROLE));
-                        String idNumber = cursor.getString(cursor.getColumnIndex(COL_ID_NUMBER));
-
-                        // Create the User object using the correct constructor
-                        User user = new User(id, fullName, contactNumber, email, userRole, idNumber, "", "");
-                        users.add(user);
-                    } while (cursor.moveToNext());
-                }
-
-
-                cursor.close();
-                db.close();
-
-                return users;
-            }
 
             // Other methods...
             public boolean checkUsername(String username) {
@@ -315,19 +439,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public long insertDriverData(ContentValues values) {
         SQLiteDatabase db = this.getWritableDatabase();
-        long result = db.insert(TABLE_DRIVERS, null, values); // Replace TABLE_DRIVER with your actual table name
-        db.close();
-        return result;  // Returns the row ID of the newly inserted row, or -1 if an error occurred
+        return db.insert(TABLE_DRIVERS, null, values);
     }
 
-    public Cursor getUsersByRole(String role) {
+
+
+    // Method to get users by role as a list
+    public List<User> getUsersByRole(String role) {
+        List<User> users = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_USERS + " WHERE " + COL_ROLE + " = ?", new String[]{role});
 
-        // Define the query to select users based on their role
-        String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COL_ROLE + " = ?";
-
-        // Execute the query and return the Cursor
-        return db.rawQuery(query, new String[]{role});
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                User user = new User();
+                user.setId(cursor.getInt(cursor.getColumnIndexOrThrow(COL_ID)));
+                user.setFullName(cursor.getString(cursor.getColumnIndexOrThrow(COL_FULL_NAME)));
+                user.setIdNumber(cursor.getString(cursor.getColumnIndexOrThrow(COL_ID_NUMBER)));
+                user.setContactNumber(cursor.getString(cursor.getColumnIndexOrThrow(COL_CONTACT_NUMBER)));
+                user.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(COL_EMAIL)));
+                user.setRole(cursor.getString(cursor.getColumnIndexOrThrow(COL_ROLE)));
+                user.setPhoto(cursor.getString(cursor.getColumnIndexOrThrow(COL_PHOTO)));
+                user.setAddress(cursor.getString(cursor.getColumnIndexOrThrow(COL_ADDRESS)));
+                users.add(user);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        return users;
     }
 
     public User getUserByFullName(String fullName) {
@@ -352,7 +490,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             // Create a User object using the data retrieved from the cursor
             User user = new User(id, fullName, contactNumber, email, role, idNumber, photo, address);
 
-            cursor.close();  // Always close the cursor
+            cursor.close();
             return user;
         } else {
             cursor.close();
@@ -360,6 +498,135 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-}
+    // Update child details
+    public boolean updateChild(int childId, String name, int age, String childClass, String photo, String emergencyContacts) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_CHILD_NAME, name);
+        contentValues.put(COL_CHILD_AGE, age);
+        contentValues.put(COL_CHILD_CLASS, childClass);
+        contentValues.put(COL_CHILD_PHOTO, photo);
+        contentValues.put(COL_CHILD_EMERGENCY_CONTACTS, emergencyContacts);
+        int result = db.update(TABLE_CHILDREN, contentValues, COL_CHILD_ID + " = ?", new String[]{String.valueOf(childId)});
+        return result > 0;
+    }
+
+    public void deleteChild(int childId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Ensure you are using the correct column name
+        String query = "DELETE FROM children WHERE id = ?";
+        db.execSQL(query, new Object[]{childId});
+    }
+
+
+    public List<ChildModel> getAllChildren() {
+        List<ChildModel> children = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query("children", null, null, null, null, null, null);
+
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex("id"));
+                String name = cursor.getString(cursor.getColumnIndex("name"));
+                int age = cursor.getInt(cursor.getColumnIndex("age"));
+                String gender = cursor.getString(cursor.getColumnIndex("gender"));
+                String school = cursor.getString(cursor.getColumnIndex("school"));
+                String childClass = cursor.getString(cursor.getColumnIndex("child_class"));
+
+                ChildModel child = new ChildModel(id, name, age, gender, school, childClass);
+                children.add(child);
+            }
+            cursor.close();
+        }
+        return children;
+    }
+
+    public long addChild(ChildModel child) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name", child.getName());
+        values.put("age", child.getAge());
+        values.put("gender", child.getGender());
+        values.put("school", child.getSchool());
+        values.put("child_class", child.getChildClass());
+
+        long id = db.insert("children", null, values);
+        db.close();
+        return id;
+    }
+
+    public Cursor getDriverDetailsByPhone(String phoneNumber) {
+        return null;
+    }
+
+    public class Driver {
+        private String childName;
+        private String parentName;
+        private String phoneNumber;
+
+        public Driver(String childName, String parentName, String phoneNumber) {
+            this.childName = childName;
+            this.parentName = parentName;
+            this.phoneNumber = phoneNumber;
+        }
+
+        public String getChildName() {
+            return childName;
+        }
+
+        public String getParentName() {
+            return parentName;
+        }
+
+        public String getPhoneNumber() {
+            return phoneNumber;
+        }
+        public Cursor getDriverDetailsByPhone(String phoneNumber) {
+
+
+            SQLiteDatabase db = this.getReadableDatabase(); // Use 'this' to refer to the current instance of DatabaseHelper
+            String query = "SELECT " + COL_PARENT_NAME + ", " + COL_CHILD_NAME + " FROM " + TABLE_DRIVERS + " WHERE " + COL_PHONE_NUMBER + " = ?";
+
+            // Execute the query and return the cursor
+            return db.rawQuery(query, new String[]{phoneNumber});
+        }
+
+        private SQLiteDatabase getReadableDatabase() {
+            return null;
+        }
+
+        public String getName() {
+            return "";
+        }
+    }
+    public boolean validateParentLogin(String email, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USERS, null, "email = ?", new String[]{email}, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            String storedPasswordHash = cursor.getString(cursor.getColumnIndex(COL_PASSWORD));
+
+            // Compare the entered password (hashed) with the stored password hash
+            return storedPasswordHash.equals(hashPassword(password));  // Make sure hashPassword method is implemented
+        }
+        return false;
+    }
+
+    public boolean validateDriverLogin(String email, String password, String carNumber) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_DRIVERS, null, "email = ? AND car_number = ?", new String[]{email, carNumber}, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            String storedPasswordHash = cursor.getString(cursor.getColumnIndex(COL_PASSWORD));
+
+            // Compare the entered password (hashed) with the stored password hash
+            return storedPasswordHash.equals(hashPassword(password));  // Make sure hashPassword method is implemented
+        }
+        return false;
+    }
+*/
+
+
 
 

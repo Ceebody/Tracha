@@ -2,16 +2,15 @@ package com.example.trachax;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 public class ParentHomeFragment extends Fragment {
     private DrawerLayout drawerLayout;
@@ -35,7 +34,7 @@ public class ParentHomeFragment extends Fragment {
 
         // Set Click Listeners for each CardView
         Otp.setOnClickListener(v -> startActivity(new Intent(requireContext(), OtpActivity.class)));
-        Bus.setOnClickListener(v -> startActivity(new Intent(requireContext(), BusActivity.class)));
+        Bus.setOnClickListener(v -> startActivity(new Intent(requireContext(), ParentBusActivity.class)));
         history.setOnClickListener(v -> startActivity(new Intent(requireContext(), HistoryActivity.class)));
         terms.setOnClickListener(v -> startActivity(new Intent(requireContext(), TermsNConditionsActivity.class)));
 

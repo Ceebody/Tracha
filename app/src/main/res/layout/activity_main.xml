@@ -27,6 +27,7 @@
        android:layout_width="wrap_content"
        android:layout_height="220dp"
        android:src="@drawable/logo"
+       android:id="@+id/logo"
        android:contentDescription="App Logo"
        android:adjustViewBounds="true"
        android:scaleType="centerInside"

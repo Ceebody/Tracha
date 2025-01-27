@@ -1,34 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:background="#C78D5E">
+    android:background="@color/purple_500"
+    android:padding="16dp">
 
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:id="@+id/nav_logo"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_gravity="center"
+        android:contentDescription="profile picture"
+        android:src="@drawable/person_add"
         android:scaleType="centerCrop"
-        android:id="@+id/logo"
-        android:layout_centerInParent="true"
-        android:src="@drawable/logo"/>
+        android:background="@drawable/circular_bg" />
 
     <TextView
+        android:id="@+id/nav_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TRACHA"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/white"
-        android:layout_alignStart="@+id/logo"
-        android:id="@+id/tracha"
-        android:layout_margin="10dp"
-        android:layout_below="@+id/logo"
-        android:textSize="30dp" />
-    </RelativeLayout>
-
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Driver Name" />
 </LinearLayout>

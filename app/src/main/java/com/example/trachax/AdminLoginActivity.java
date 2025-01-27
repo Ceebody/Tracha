@@ -1,6 +1,7 @@
 package com.example.trachax;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,10 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.trachax.AdminDashboardActivity;
-import com.example.trachax.R;
-import com.example.trachax.RegisterActivity;
 
 public class AdminLoginActivity extends AppCompatActivity {
 
@@ -81,6 +78,12 @@ public class AdminLoginActivity extends AppCompatActivity {
                 // Mock success case
                 if (email.equals("admin@example.com") && password.equals("admin123")) {
                     Toast.makeText(AdminLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
+                    // Store the admin email in SharedPreferences
+                    SharedPreferences sharedPreferences = getSharedPreferences("AdminPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("admin_email", email); // Store the email
+                    editor.apply(); // Save the changes
 
                     // Navigate to AdminDashboardActivity
                     Intent intent = new Intent(AdminLoginActivity.this, AdminDashboardActivity.class);

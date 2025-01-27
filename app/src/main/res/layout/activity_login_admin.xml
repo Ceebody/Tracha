@@ -52,7 +52,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:padding="10dp"
         android:inputType="textPassword"
         android:hint="Passkey"
@@ -64,7 +64,7 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:padding="10dp"
                 android:inputType="textEmailAddress"
                 android:hint="Email"
@@ -75,7 +75,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:padding="10dp"
         android:inputType="textPassword"
         android:hint="Password"
@@ -99,34 +99,34 @@
             android:textSize="24dp"
             android:id="@+id/Admin_login_btn"
             android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
             android:text="Login"
             android:background="@drawable/border_2"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="20"
+                android:weightSum="30"
                 android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:text="Don't have an account?"
-                    android:textSize="18dp"/>
+                    android:textSize="16dp"/>
 
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="200dp"
                     android:layout_height="50dp"
-                    android:text="Sign up"
-                    android:textSize="18dp"
+                    android:text="Contact your developer"
+                    android:textSize="16dp"
                     android:id="@+id/signup_admin"
-                    android:layout_marginStart="10dp"
-                    android:clickable="true"/>
+                    android:layout_marginStart="5dp" />
 
             </LinearLayout>
 
         <ProgressBar
-            android:layout_width="32dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:id="@+id/progress_bar_admin"
             android:indeterminateTint="@color/teal_700"

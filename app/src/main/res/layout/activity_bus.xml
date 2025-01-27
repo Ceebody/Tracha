@@ -8,15 +8,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/eta_text"
+
+
+
+    <Button
+        android:id="@+id/btnTrackDriver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="#AA000000"
-        android:padding="8dp"
-        android:text="ETA: Calculating..."
-        android:textColor="#FFFFFF"
-        android:textSize="16sp" />
+        android:text="Start journey"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
+
+
 </RelativeLayout>
